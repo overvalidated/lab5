@@ -72,7 +72,7 @@ public class Ticket implements Comparable<Ticket> {
         boolean createdBefore = this.creationDate.compareTo(ticket.creationDate) < 0;
         
         if (createdBefore) {
-
+            
         } else {
             
         }

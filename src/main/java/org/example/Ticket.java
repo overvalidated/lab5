@@ -36,17 +36,15 @@ public class Ticket implements Comparable<Ticket> {
         
         
         // Checking neccesary conditions
-        if (name == null || coordinates == null || type == null || person == null) {
+        if (name == null || coordinates == null || type == null || person == null) 
             throw new IllegalArgumentException("Required field is missing, check if necessary field are not nulls");
-        }
 
-        if (price <= 0) {
-            throw new IllegalArgumentException("Price must be positive");
-        }
+        if 
 
-        if (discount <= 0 || discount > 100) {
-            throw new IllegalArgumentException("Discount must be positive and less than 100");
-        }
+        if (price <= 0) throw new IllegalArgumentException("Price must be positive");
+        
+
+        if (discount <= 0 || discount > 100) throw new IllegalArgumentException("Discount must be positive and less than 100");
 
         // Assigning fields
         this.id = id;
@@ -58,7 +56,7 @@ public class Ticket implements Comparable<Ticket> {
         this.refundable = refundable;
         this.type = type;
         this.person = person;
-
+    
     }
 
     public Ticket(String name, Coordinates coord, long price, double discount, boolean refundable, 

@@ -13,5 +13,11 @@ public class Person {
         if (hairColor == null) throw new IllegalArgumentException("Hair can't be missing value");
         if (nationality == null) throw new IllegalArgumentException("Nationality can't be missing value");
         if (location == null) throw new IllegalArgumentException("Location can't be missing value");
+
+        this.height = height;
+        this.eyeColor = eyeColor;
+        this.hairColor = hairColor;
+        this.nationality = nationality;
+        this.location = location;
     }
 }

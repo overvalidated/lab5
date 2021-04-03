@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class CLIObjectCreator {
 
     public static void main(String[] args) {
+        boolean refundable = App.globalScanner.nextBoolean();
         requestNewTicket();
     }
 
@@ -33,9 +34,9 @@ public class CLIObjectCreator {
 
         while (true) {
             try {
-            System.out.println("Enter x coordinate: ");
-            x = App.globalScanner.nextLong();
-            break;
+                System.out.println("Enter x coordinate: ");
+                x = App.globalScanner.nextLong();
+                break;
             } catch (InputMismatchException e) {
                 System.out.println("There was a problem when parsing the passed value. Repeat te input (e.g. 123)");
             }

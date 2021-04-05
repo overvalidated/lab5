@@ -1,12 +1,11 @@
 package org.example;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class CLIObjectCreator {
 
     public static void main(String[] args) {
-        boolean refundable = App.globalScanner.nextBoolean();
         requestNewTicket();
     }
 
@@ -16,12 +15,54 @@ public class CLIObjectCreator {
 
         Coordinates coords = requestNewCoordinate();
 
-        System.out.println("Enter a price: ");
-        long price = App.globalScanner.nextLong();
-        System.out.println("Enter discount percent (0-100): ");
-        double discount = App.globalScanner.nextDouble();
-        System.out.println("Is it refundable? (true/false): ");
-        boolean refundable = App.globalScanner.nextBoolean();
+        Long price = null;
+        price_request_loop:
+        while (true) {
+            System.out.println("Enter a price (integer or null): ");
+            String priceString = App.globalScanner.nextLine();
+            switch (priceString) {
+                case "null": break price_request_loop;
+                default: try { 
+                    price = Long.parseLong(priceString); break price_request_loop; 
+                } catch (NumberFormatException e) {
+                    System.out.println("Problem occured while parsing your input. " + 
+                    "Please, ensure that the value you enter is correct. ");
+                }
+            }
+        }
+
+        Double discount = null;
+        discout_request_loop:
+        while (true) {
+            System.out.println("Enter discount percent (0-100 or null): ");
+            String discountString = App.globalScanner.nextLine();
+            switch (discountString) {
+                case "null": break discout_request_loop;
+                default: 
+                    try { 
+                        price = Long.parseLong(discountString); break discout_request_loop; 
+                    } catch (NumberFormatException e) {
+                        System.out.println("Problem occured while parsing your input. " + 
+                        "Please, ensure that the value you enter is correct. ");
+                    }
+            }
+        }
+        
+        Boolean refundable = null;
+        while (true) {
+            System.out.println("Is it refundable? (true/false/null): ");
+            String refundableString = App.globalScanner.nextLine();
+            if (refundableString.equals("true")) {
+                refundable = true;
+            } else if (refundableString.equals("false")) {
+                refundable = false;
+            } else if (!refundableString.equals("null")) {
+                System.out.println("Enter one of true/false/null values");
+                continue;
+            }
+            break;
+        }
+        
         
         TicketType ticketType = requestNewTicketType();
         Person person = requestNewPerson();
@@ -38,7 +79,7 @@ public class CLIObjectCreator {
                 x = App.globalScanner.nextLong();
                 break;
             } catch (InputMismatchException e) {
-                System.out.println("There was a problem when parsing the passed value. Repeat te input (e.g. 123)");
+                System.out.println("There was a problem during parsing the passed value. Repeat the input (e.g. 123)");
             }
         }
         while (true) {
@@ -47,7 +88,7 @@ public class CLIObjectCreator {
             y = App.globalScanner.nextDouble();
             break;
             } catch (InputMismatchException e) {
-                System.out.println("There was a problem when parsing the passed value. Repeat te input (e.g. 42,5)");
+                System.out.println("There was a problem during parsing the passed value. Repeat the input (e.g. 42,5)");
             }
         }
         return new Coordinates(x, y);

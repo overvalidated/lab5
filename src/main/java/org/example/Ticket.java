@@ -58,8 +58,7 @@ public class Ticket implements Comparable<Ticket> {
 
     public Ticket(String name, Coordinates coord, long price, double discount, boolean refundable, 
             TicketType type, Person person) throws IllegalArgumentException {
-        Date now = Date.from(Instant.now());
-        Ticket(++counter, name, coord, now, price, discount, refundable, type, person);
+        this(++counter, name, coord, Date.from(Instant.now()), price, discount, refundable, type, person);
     }
 
     public int compareTo(Ticket ticket) {

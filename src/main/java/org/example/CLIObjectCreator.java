@@ -1,6 +1,5 @@
 package org.example;
 
-import java.io.IOException;
 import java.util.InputMismatchException;
 
 public class CLIObjectCreator {
@@ -26,7 +25,7 @@ public class CLIObjectCreator {
                     price = Long.parseLong(priceString); break price_request_loop; 
                 } catch (NumberFormatException e) {
                     System.out.println("Problem occured while parsing your input. " + 
-                    "Please, ensure that the value you enter is correct. ");
+                    "Please, ensure that the value you've entered is correct. ");
                 }
             }
         }
@@ -43,7 +42,7 @@ public class CLIObjectCreator {
                         price = Long.parseLong(discountString); break discout_request_loop; 
                     } catch (NumberFormatException e) {
                         System.out.println("Problem occured while parsing your input. " + 
-                        "Please, ensure that the value you enter is correct. ");
+                        "Please, ensure that the value you've entered is correct. ");
                     }
             }
         }
@@ -79,7 +78,7 @@ public class CLIObjectCreator {
                 x = App.globalScanner.nextLong();
                 break;
             } catch (InputMismatchException e) {
-                System.out.println("There was a problem during parsing the passed value. Repeat the input (e.g. 123)");
+                System.out.println("There was a problem during parsing the passed value. Enter the value again (e.g. 123)");
             }
         }
         while (true) {
@@ -88,7 +87,7 @@ public class CLIObjectCreator {
             y = App.globalScanner.nextDouble();
             break;
             } catch (InputMismatchException e) {
-                System.out.println("There was a problem during parsing the passed value. Repeat the input (e.g. 42,5)");
+                System.out.println("There was a problem during parsing the passed value. Enter the value again (e.g. 42,5)");
             }
         }
         return new Coordinates(x, y);

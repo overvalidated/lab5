@@ -11,7 +11,6 @@ public class CLIObjectCreator {
     public static Ticket requestNewTicket() {
         System.out.println("Enter a name: ");
         String name = App.globalScanner.nextLine();
-
         Coordinates coords = requestNewCoordinate();
 
         Long price = null;
@@ -39,7 +38,7 @@ public class CLIObjectCreator {
                 case "null": break discout_request_loop;
                 default: 
                     try { 
-                        price = Long.parseLong(discountString); break discout_request_loop; 
+                        discount = Double.parseDouble(discountString); break discout_request_loop; 
                     } catch (NumberFormatException e) {
                         System.out.println("Problem occured while parsing your input. " + 
                         "Please, ensure that the value you've entered is correct. ");
@@ -75,7 +74,7 @@ public class CLIObjectCreator {
         while (true) {
             try {
                 System.out.println("Enter x coordinate: ");
-                x = App.globalScanner.nextLong();
+                x = Long.parseLong(App.globalScanner.nextLine());
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("There was a problem during parsing the passed value. Enter the value again (e.g. 123)");
@@ -84,7 +83,7 @@ public class CLIObjectCreator {
         while (true) {
             try {
             System.out.println("Enter y coordinate: ");
-            y = App.globalScanner.nextDouble();
+            y = Double.parseDouble(App.globalScanner.nextLine());
             break;
             } catch (InputMismatchException e) {
                 System.out.println("There was a problem during parsing the passed value. Enter the value again (e.g. 42,5)");
@@ -98,12 +97,13 @@ public class CLIObjectCreator {
         String ticketTypeName;
         while (true) {
             try {
-                System.out.println("Enter person's eye color: ");
+                System.out.println("Enter ticket type: ");
                 ticketTypeName = App.globalScanner.nextLine();
-                return TicketType.valueOf(ticketTypeName);
+                
+                return TicketType.valueOf(ticketTypeName.toUpperCase());
             } catch (IllegalArgumentException e) {
-                System.out.println("This color doesn't exist");
-            }
+                System.out.println("This ticket type doesn't exist");
+            } 
         }
     }
 
@@ -113,8 +113,9 @@ public class CLIObjectCreator {
             try {
                 System.out.println(requestText);
                 colorName = App.globalScanner.nextLine();
-                return Color.valueOf(colorName);
+                return Color.valueOf(colorName.toUpperCase());
             } catch (IllegalArgumentException e) {
+                e.printStackTrace();
                 System.out.println("This color doesn't exist");
             }
         }
@@ -122,10 +123,10 @@ public class CLIObjectCreator {
     public static Country requestNewCountry() {
         String countryName;
         while (true) {
+            System.out.println("Enter person's nationality: ");
+            countryName = App.globalScanner.nextLine();
             try {
-                System.out.println("Enter person's nationality color: ");
-                countryName = App.globalScanner.nextLine();
-                return Country.valueOf(countryName);
+                return Country.valueOf(countryName.toUpperCase());
             } catch (IllegalArgumentException e) {
                 System.out.println("This country doesn't exist");
             }
@@ -134,16 +135,25 @@ public class CLIObjectCreator {
 
     public static Person requestNewPerson() {
         System.out.println("Enter person's height: ");
-        float height = App.globalScanner.nextFloat();
+        Double height = null;
+        while (true) {
+            System.out.println("Is it refundable? (true/false/null): ");
+            String heightString = App.globalScanner.nextLine();
+            try {
+                height = Double.parseDouble(heightString);
+            } catch (IllegalArgumentException e) {
+                System.out.println("This country doesn't exist");
+            }
+            break;
+        }
         Color eyeColor = requestNewColor("Enter person's eye color: ");
         Color hairColor = requestNewColor("Enter person's hair color: ");
         Country nationality = requestNewCountry();
         Location location = requestNewLocation();
         return new Person(height, eyeColor, hairColor, nationality, location);
     }
-
+    
     public static Location requestNewLocation() {
-
         System.out.println("Enter x coordinate: ");
         double x = App.globalScanner.nextDouble();
         System.out.println("Enter y coordinate: ");

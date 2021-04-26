@@ -2,11 +2,11 @@ package org.example;
 
 
 public class Location {
-    private Double x; //Поле не может быть null
-    private long y;
-    private Double z; //Поле не может быть null
+    private double x; //Поле не может быть null
+    private Long y;
+    private double z; //Поле не может быть null
 
-    public Location(double x, long y, double z) {
+    public Location(double x, Long y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;

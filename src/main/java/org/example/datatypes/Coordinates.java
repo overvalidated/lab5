@@ -1,7 +1,7 @@
 package org.example;
 
 
-public class Coordinates {
+public class Coordinates{
     private Long x; //Максимальное значение поля: 643
     private Double y;
 

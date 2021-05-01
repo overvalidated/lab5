@@ -1,4 +1,4 @@
-package org.example;
+package org.germanbeyger.lab5.datatypes;
 
 public class Person {
     private Float height; //Значение поля должно быть больше 0

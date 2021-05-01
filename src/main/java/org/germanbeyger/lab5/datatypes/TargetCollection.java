@@ -1,4 +1,4 @@
-package org.example;
+package org.germanbeyger.lab5.datatypes;
 
 import java.time.Instant;
 import java.util.Date;
@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.function.Predicate;
 
-import org.example.interfaces.ITargetCollection;
+import org.germanbeyger.lab5.interfaces.ITargetCollection;
 
 public class TargetCollection implements ITargetCollection {
     private final LinkedList<Ticket> targetCollection = new LinkedList<>();

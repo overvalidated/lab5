@@ -1,7 +1,15 @@
-package org.example;
+package org.germanbeyger.lab5.cli;
 
 import java.util.Scanner;
 import java.util.function.Function;
+
+import org.germanbeyger.lab5.datatypes.Color;
+import org.germanbeyger.lab5.datatypes.Coordinates;
+import org.germanbeyger.lab5.datatypes.Country;
+import org.germanbeyger.lab5.datatypes.Location;
+import org.germanbeyger.lab5.datatypes.Person;
+import org.germanbeyger.lab5.datatypes.Ticket;
+import org.germanbeyger.lab5.datatypes.TicketType;
 
 public class CLIObjectCreator {
     // for debug purposes

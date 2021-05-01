@@ -1,6 +1,7 @@
-package org.example.interfaces;
+package org.germanbeyger.lab5.interfaces;
 import java.util.function.Predicate;
-import org.example.Ticket;
+
+import org.germanbeyger.lab5.datatypes.Ticket;
 /**
  * Interface for TargetCollection class
  * 

@@ -1,4 +1,4 @@
-package org.example;
+package org.germanbeyger.lab5.datatypes;
 
 
 public enum Color2 {

@@ -1,4 +1,4 @@
-package org.example;
+package org.germanbeyger.lab5.cli;
 
 import java.io.BufferedInputStream;
 import java.util.NoSuchElementException;

@@ -1,4 +1,6 @@
-package org.example;
+package org.germanbeyger.lab5;
+
+import org.germanbeyger.lab5.datatypes.TargetCollection;
 
 public final class XMLCollectionProcessor {
     // enforcing singleton pattern

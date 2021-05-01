@@ -1,7 +1,11 @@
-package org.example;
+package org.germanbeyger.lab5;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import org.germanbeyger.lab5.cli.CLIObjectCreator;
+import org.germanbeyger.lab5.datatypes.TargetCollection;
+import org.germanbeyger.lab5.datatypes.Ticket;
 
 public class App {
     private static TargetCollection targetCollection;

@@ -1,16 +1,14 @@
 package org.germanbeyger.lab5.datatypes;
 
 public class Person {
-    private Float height; //Значение поля должно быть больше 0
+    private float height; //Значение поля должно быть больше 0
     private Color eyeColor; //Поле не может быть null
-    private Color hairColor; //Поле не может быть null
+    private Color2 hairColor; //Поле не может быть null
     private Country nationality; //Поле не может быть null
     private Location location; //Поле не может быть null
 
-    public Person(Float height, Color eyeColor, Color hairColor, Country nationality, Location location) {
-        if (height != null) {
-            if (height <= 0) throw new IllegalArgumentException("Height must be positive");
-        }
+    public Person(float height, Color eyeColor, Color2 hairColor, Country nationality, Location location) {
+        if (height <= 0) throw new IllegalArgumentException("Height must be positive");
     
         if (eyeColor == null) throw new IllegalArgumentException("Eye color can't be missing value");
         if (hairColor == null) throw new IllegalArgumentException("Hair can't be missing value");
@@ -23,4 +21,36 @@ public class Person {
         this.nationality = nationality;
         this.location = location;
     }
+
+    public float getHeight() {
+        return this.height;
+    }
+
+    public Color getEyeColor() {
+        return this.eyeColor;
+    }
+
+    public Color2 getHairColor() {
+        return this.hairColor;
+    }
+
+    public Country getNationality() {
+        return this.nationality;
+    }
+
+    public Location getLocation() {
+        return this.location;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " height='" + getHeight() + "'" +
+            ", eyeColor='" + getEyeColor() + "'" +
+            ", hairColor='" + getHairColor() + "'" +
+            ", nationality='" + getNationality() + "'" +
+            ", location='" + getLocation() + "'" +
+            "}";
+    }
+
 }

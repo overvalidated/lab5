@@ -2,14 +2,31 @@ package org.germanbeyger.lab5.datatypes;
 
 
 public class Coordinates{
-    private Long x; //Максимальное значение поля: 643
-    private Double y;
+    private long x; //Максимальное значение поля: 643
+    private double y;
 
-    public Coordinates(Long x, Double y) {
-        if (x != null) {
-            if (x > 643) throw new IllegalArgumentException("X must be less than 643");
-        }
+    public Coordinates(long x, double y) {
+        if (x > 643) throw new IllegalArgumentException("X must be less or equal to 643");
+        
         this.x = x;
         this.y = y;
     }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " x='" + getX() + "'" +
+            ", y='" + getY() + "'" +
+            "}";
+    }
+
+    public long getX() {
+        return this.x;
+    }
+
+    public double getY() {
+        return this.y;
+    }
+    
 }

@@ -18,9 +18,9 @@ public class Ticket implements Comparable<Ticket> {
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
     private Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-    private Long price; //Значение поля должно быть больше 0
-    private Double discount; //Значение поля должно быть больше 0, Максимальное значение поля: 100
-    private Boolean refundable;
+    private long price; //Значение поля должно быть больше 0
+    private double discount; //Значение поля должно быть больше 0, Максимальное значение поля: 100
+    private boolean refundable;
     private TicketType type; //Поле не может быть null
     private Person person; //Поле не может быть null
 
@@ -41,22 +41,18 @@ public class Ticket implements Comparable<Ticket> {
      * @throws IllegalArgumentException if entered or loaded values do not fit the conditions.
      */
     public Ticket(int id, String name, Coordinates coord, Date creationDate, 
-            Long price, Double discount, Boolean refundable, 
+            long price, double discount, boolean refundable, 
             TicketType type, Person person) throws IllegalArgumentException {
         
         
         // Checking neccesary conditions
         if (name == null || coord == null || type == null || person == null) 
-            throw new IllegalArgumentException("Required field is missing, check if necessary field is not nulls");
+            throw new IllegalArgumentException("Required field is missing, check that necessary fields are not nulls");
 
-        if (price != null) {
-            if (price <= 0) throw new IllegalArgumentException("Price must be positive");
-        } 
+        if (price <= 0) throw new IllegalArgumentException("Price must be positive");
         
-        if (discount != null) {
-            if (discount <= 0 || discount > 100) 
-                throw new IllegalArgumentException("Discount must be positive and less than 100");
-        }
+        if (discount <= 0 || discount > 100) 
+            throw new IllegalArgumentException("Discount must be positive and less than 100");
 
         // Assigning fields
         this.id = id;
@@ -85,7 +81,7 @@ public class Ticket implements Comparable<Ticket> {
      * @param person
      * @throws IllegalArgumentException
      */
-    public Ticket(int id, String name, Coordinates coord, Long price, Double discount, Boolean refundable, 
+    public Ticket(int id, String name, Coordinates coord, long price, double discount, boolean refundable, 
             TicketType type, Person person) throws IllegalArgumentException {
         this(id, name, coord, Date.from(Instant.now()), price, discount, refundable, type, person);
     }
@@ -100,8 +96,8 @@ public class Ticket implements Comparable<Ticket> {
      */
     public int compareTo(Ticket ticket) {
         // Sort by price
-        if (!this.price.equals(ticket.price)) 
-            return this.price.compareTo(ticket.price);
+        if (this.price != ticket.price)
+            return (this.price - ticket.price) > 0 ? 1 : -1;
         // Then sort by ticket type
         if (!this.type.equals(ticket.type))
             return this.type.compareTo(ticket.type);
@@ -110,6 +106,21 @@ public class Ticket implements Comparable<Ticket> {
             return this.creationDate.compareTo(ticket.creationDate);
         
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", name='" + getName() + "'" +
+            ", coordinates='" + getCoordinates() + "'" +
+            ", creationDate='" + getCreationDate() + "'" +
+            ", price='" + getPrice() + "'" +
+            ", discount='" + getDiscount() + "'" +
+            ", refundable='" + isRefundable() + "'" +
+            ", type='" + getType() + "'" +
+            ", person='" + getPerson() + "'" +
+            "}";
     }
 
     public int getId() {

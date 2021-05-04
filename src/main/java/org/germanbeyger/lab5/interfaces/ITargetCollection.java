@@ -11,7 +11,6 @@ import org.germanbeyger.lab5.datatypes.Ticket;
  * Supports only {@link Ticket} class. 
  * <p>
  * 
- * @see {@link java.util.LinkedList LinkedList}
  * 
  */
 public interface ITargetCollection extends Iterable<Ticket> {

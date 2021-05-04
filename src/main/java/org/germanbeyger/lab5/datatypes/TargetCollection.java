@@ -11,7 +11,7 @@ import org.germanbeyger.lab5.interfaces.ITargetCollection;
 public class TargetCollection implements ITargetCollection {
     private final LinkedList<Ticket> targetCollection;
     private final MetaInformationTargetCollection metainfo; 
-    private Ticket maxTicket; // max ticket.
+    private Ticket maxTicket = null; // max ticket.
     private int nextId = 0;
 
     public TargetCollection() {
@@ -57,6 +57,13 @@ public class TargetCollection implements ITargetCollection {
     }
 
     public void addIfMax(Ticket ticket) {
+        // Mm, first time? 
+        if (maxTicket == null) {
+            add(ticket);
+            maxTicket = ticket;
+            return;
+        } 
+        
         if (ticket.compareTo(maxTicket) > 0) {
             add(ticket);
             maxTicket = ticket;

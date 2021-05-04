@@ -14,7 +14,7 @@ public class FieldRequester {
      * @param stringParser
      * @param requestMessage
      * @param supportNull
-     * @param scanner
+     * @param stdInScanner
      * @return
      */
     public static <T> T parseField(Function<String, T> stringParser,

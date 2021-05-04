@@ -29,7 +29,7 @@ public class Ticket implements Comparable<Ticket> {
      * 
      * <p>
      * This constructor must be used when loading from XML.
-     * If you create an instance from CLI please consider using simplified constructor {@link Ticket#Ticket(int, String, Coordinates, Long, Double, Boolean, TicketType, Person)}
+     * If you create an instance from CLI please consider using simplified constructor {@link Ticket#Ticket(int, String, Coordinates, long, double, boolean, TicketType, Person)}
      * <p>
      * @param name name of ticket. Must be not null and not an empty string.
      * @param coord instance of class {@link Coordinates}

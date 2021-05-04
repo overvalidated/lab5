@@ -7,8 +7,12 @@ import org.germanbeyger.lab5.datatypes.TargetCollection;
 import org.germanbeyger.lab5.interfaces.IExecutor;
 
 /**
- * Class for storing and invoking every available command
+ * Class for storing and invoking every available interactive command
  * <p>
+ * Every command is stored as a pair of name and link to command "execute" in it's class.
+ * When command is parsed, the name and arguments are passed to {@link #invokeCommand(String[], TargetCollection, Scanner)}
+ * This method finds command and invokes lambda-expression.
+ * Commands don't return anything.
  * <p>
  * 
  * 
@@ -42,7 +46,13 @@ public enum Commands {
     public String getName() {
         return this.name;
     }
-
+    /**
+     * 
+     * @param args args[0] is command and args[1] - it's argument
+     * @param targetCollection TargetCollection object
+     * @param stdInScanner Scanner with System.in (passed from main)
+     * @throws NoSuchObjectException if command was not found.
+     */
     public static void invokeCommand(String[] args, TargetCollection targetCollection, Scanner stdInScanner) throws NoSuchObjectException {
         final String COMMAND_NAME = args[0];
         for (Commands command : Commands.values()) {
@@ -56,6 +66,12 @@ public enum Commands {
         );
     }
 
+    /**
+     * 
+     * @param args
+     * @param targetCollection
+     * @param stdInScanner
+     */
     public void execute(String[] args, TargetCollection targetCollection, Scanner stdInScanner) {
         execCommand.execute(args, targetCollection, stdInScanner);
         targetCollection.addToHistory(this.name);

@@ -71,11 +71,9 @@ public final class XMLCollectionProcessor {
 
             String xml = bufStream.readLine(); 
             result = (TargetCollection)xstream.fromXML(xml);
-        } 
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.printf("Problems accessing this file %s. \n", filepath);
-        }
-        catch (XStreamException | IOException e ) {
+        } catch (XStreamException | IOException e ) {
             System.out.println(ERROR_MESSAGE);
         }
         return result;

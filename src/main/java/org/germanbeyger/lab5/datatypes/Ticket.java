@@ -32,7 +32,7 @@ public class Ticket implements Comparable<Ticket> {
      * If you create an instance from CLI please consider using simplified constructor {@link Ticket#Ticket(int, String, Coordinates, long, double, boolean, TicketType, Person)}
      * <p>
      * @param name name of ticket. Must be not null and not an empty string.
-     * @param coord instance of class {@link Coordinates}
+     * @param coordinates instance of class {@link Coordinates}
      * @param price positive Long value, can be null.
      * @param discount positive double value that must be in range between 0 and 100.
      * @param refundable positive boolean, can be null.
@@ -40,16 +40,18 @@ public class Ticket implements Comparable<Ticket> {
      * @param person {@link Person}
      * @throws IllegalArgumentException if entered or loaded values do not fit the conditions.
      */
-    public Ticket(int id, String name, Coordinates coord, Date creationDate, 
+    public Ticket(int id, String name, Coordinates coordinates, Date creationDate, 
             long price, double discount, boolean refundable, 
             TicketType type, Person person) throws IllegalArgumentException {
         
         
         // Checking neccesary conditions
-        if (name == null || coord == null || type == null || person == null) 
+        if (name == null || coordinates == null || type == null || person == null) 
             throw new IllegalArgumentException("Required field is missing, check that necessary fields are not nulls");
 
         if (price <= 0) throw new IllegalArgumentException("Price must be positive");
+        
+        if (id < 1) throw new IllegalArgumentException("id must be positive.");
         
         if (discount <= 0 || discount > 100) 
             throw new IllegalArgumentException("Discount must be positive and less than 100");
@@ -57,7 +59,7 @@ public class Ticket implements Comparable<Ticket> {
         // Assigning fields
         this.id = id;
         this.name = name;
-        this.coordinates = coord;
+        this.coordinates = coordinates;
         this.creationDate = creationDate;
         this.price = price;
         this.discount = discount;
@@ -81,9 +83,9 @@ public class Ticket implements Comparable<Ticket> {
      * @param person
      * @throws IllegalArgumentException
      */
-    public Ticket(int id, String name, Coordinates coord, long price, double discount, boolean refundable, 
+    public Ticket(int id, String name, Coordinates coordinates, long price, double discount, boolean refundable, 
             TicketType type, Person person) throws IllegalArgumentException {
-        this(id, name, coord, Date.from(Instant.now()), price, discount, refundable, type, person);
+        this(id, name, coordinates, Date.from(Instant.now()), price, discount, refundable, type, person);
     }
 
     
@@ -121,6 +123,14 @@ public class Ticket implements Comparable<Ticket> {
             ", type='" + getType() + "'" +
             ", person='" + getPerson() + "'" +
             "}";
+    }
+
+    public boolean verify() {
+        if (name == null || coordinates == null || type == null || person == null) return false;
+        if (price <= 0) return false;
+        if (id < 1) return false;
+        if (discount <= 0 || discount > 100) return false;
+        return (getCoordinates().verify() && getPerson().verify());
     }
 
     public int getId() {

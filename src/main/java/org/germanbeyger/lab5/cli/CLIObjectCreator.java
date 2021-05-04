@@ -1,17 +1,10 @@
 package org.germanbeyger.lab5.cli;
 
+import org.germanbeyger.lab5.datatypes.*;
+
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.function.Function;
-
-import org.germanbeyger.lab5.datatypes.Color;
-import org.germanbeyger.lab5.datatypes.Color2;
-import org.germanbeyger.lab5.datatypes.Coordinates;
-import org.germanbeyger.lab5.datatypes.Country;
-import org.germanbeyger.lab5.datatypes.Location;
-import org.germanbeyger.lab5.datatypes.Person;
-import org.germanbeyger.lab5.datatypes.Ticket;
-import org.germanbeyger.lab5.datatypes.TicketType;
 
 /**
  * Class containing methods for objects creation via command line.

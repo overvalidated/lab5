@@ -28,7 +28,7 @@ public class App {
         boolean createNew = FieldRequester.parseField(parseAnswer,
                 "Create new? (y/n): ", false, stdInScanner);
         if (!createNew)
-            return;
+            System.exit(0);
         collectionPath = FieldRequester.parseField((input) -> input, "Enter filename: ", false, stdInScanner);
         targetCollection = new TargetCollection();
     }
@@ -42,6 +42,11 @@ public class App {
 
         collectionPath = args[0];
         targetCollection = XMLCollectionProcessor.load(collectionPath);
+        // если не проходим верификацию - то выкидываем коллекцию
+        if (!targetCollection.verify()) {
+            System.out.println("Loaded collection is corrupted. ");
+            targetCollection = null;
+        }
         try (Scanner stdInScanner = new Scanner(System.in)) {
             // Если коллекция не загружена - запрашиваем создание новой
             if (targetCollection == null) {

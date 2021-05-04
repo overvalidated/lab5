@@ -1,5 +1,6 @@
 package org.germanbeyger.lab5.datatypes;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
@@ -12,12 +13,26 @@ public class TargetCollection implements ITargetCollection {
     private final LinkedList<Ticket> targetCollection;
     private final MetaInformationTargetCollection metainfo; 
     private Ticket maxTicket = null; // max ticket.
-    private int nextId = 0;
+    private int nextId = 1;
 
     public TargetCollection() {
         // Collection created from zero
         targetCollection = new LinkedList<>();
         metainfo = new MetaInformationTargetCollection();
+    }
+
+    public boolean verify() {
+        ArrayList<Integer> ids = new ArrayList<Integer>(targetCollection.stream()
+                .map(input -> input.getId())
+                .collect(Collectors.toList()));
+        ids.sort(Integer::compareTo);
+        int prev = ids.get(0);
+        for (int i = 1; i < ids.size()-2; i++) {
+            if (ids.get(i).equals(prev)) {
+                return false;
+            }
+        }
+        return targetCollection.stream().allMatch(input -> input.verify());
     }
 
     // Service functions

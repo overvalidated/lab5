@@ -13,6 +13,10 @@ public class Location {
         this.z = z;
     }
 
+    public boolean verify() {
+        return (x != null && z != null);
+    }
+
     @Override
     public String toString() {
         return "{" +

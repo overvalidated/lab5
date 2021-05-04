@@ -12,6 +12,10 @@ public class Coordinates{
         this.y = y;
     }
 
+    public boolean verify() {
+        return x <= 643;
+    }
+
 
     @Override
     public String toString() {

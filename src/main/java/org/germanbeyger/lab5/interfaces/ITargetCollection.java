@@ -25,4 +25,6 @@ public interface ITargetCollection extends Iterable<Ticket> {
     int getNextId();
     String getInfoAboutCollection();
     int countElements(); // returns number of elements in collection
+
+    boolean verify();
 }

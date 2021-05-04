@@ -32,7 +32,7 @@ public class TargetCollection implements ITargetCollection {
                 return false;
             }
         }
-        return targetCollection.stream().allMatch(input -> input.verify());
+        return targetCollection.stream().allMatch(input -> input.verify()) && metainfo.verify();
     }
 
     // Service functions

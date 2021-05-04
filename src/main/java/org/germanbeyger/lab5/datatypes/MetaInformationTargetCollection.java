@@ -16,6 +16,10 @@ public class MetaInformationTargetCollection implements IMetainfo {
         creationDate = Date.from(Instant.now());
     }
 
+    public boolean verify() {
+        return (creationDate != null && history != null);
+    }
+
     public void addToHistory(String command) {
         history.addFirst(command);
         if (history.size() == 12)

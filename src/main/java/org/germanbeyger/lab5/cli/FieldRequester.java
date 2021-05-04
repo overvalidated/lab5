@@ -34,7 +34,7 @@ public class FieldRequester {
                 System.exit(1);
             }
             // If result is an empty string and we support empty values (aka nulls) then return null;
-            if (supportNull && requestString == "") 
+            if (supportNull && requestString.equals("")) 
                 break; 
             // If not empty then try to parse the value.
             // If we can't parse then ask to enter the value again.

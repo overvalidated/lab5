@@ -25,13 +25,6 @@ public final class CLIObjectCreator {
     // This class MUST NOT BE INSTANTIATED!
     private CLIObjectCreator() { }
 
-    // for debug purposes
-    public static void main(String[] args) {
-        try (Scanner stdInScanner = new Scanner(System.in)) { 
-            requestNewTicket(0, stdInScanner);
-        }
-    }
-
     public static Ticket requestNewTicket(int id, Scanner stdInScanner) {
         // Used to parse name field in Ticket class
         Function<String, String> nameParser = (input) -> { 
@@ -88,28 +81,34 @@ public final class CLIObjectCreator {
 
     public static TicketType requestNewTicketType(Scanner stdInScanner) {
         return FieldRequester.parseField(
-            TicketType::valueOf, 
-            String.format("Enter ticket type (values allowed are %s): ", Arrays.asList(TicketType.values())), 
-            false, stdInScanner);
+                TicketType::valueOf, 
+                String.format("Enter ticket type (values allowed are %s): ", Arrays.asList(TicketType.values())), 
+                false, stdInScanner);
     }
 
     public static Color requestNewColor(String requestText, Scanner stdInScanner) {
-        return FieldRequester.parseField(Color::valueOf, requestText, false, stdInScanner);
+        return FieldRequester.parseField(Color::valueOf, 
+                String.format("%s (values allowed are %s): ", requestText, Arrays.asList(Color.values())),
+                false, stdInScanner);
     }
 
     public static Color2 requestNewColor2(String requestText, Scanner stdInScanner) {
-        return FieldRequester.parseField(Color2::valueOf, requestText, false, stdInScanner);
+        return FieldRequester.parseField(Color2::valueOf, 
+                String.format("%s (values allowed are %s): ", requestText, Arrays.asList(Color2.values())),
+                false, stdInScanner);
     }
 
     public static Country requestNewCountry(Scanner stdInScanner) {
-        return FieldRequester.parseField(Country::valueOf, "Enter person's nationality: ", false, stdInScanner);
+        return FieldRequester.parseField(Country::valueOf, 
+        String.format("Enter person's nationality (values allowed are %s): ", Arrays.asList(Country.values())),
+        false, stdInScanner);
     }
 
     public static Person requestNewPerson(Scanner stdInScanner) {
         float height = FieldRequester.parseField(Float::parseFloat, 
                 "Enter person's height (float or empty string): ", false, stdInScanner);
-        Color eyeColor = requestNewColor("Enter person's eye color: ", stdInScanner);
-        Color2 hairColor = requestNewColor2("Enter person's hair color: ", stdInScanner);
+        Color eyeColor = requestNewColor("Enter person's eye color ", stdInScanner);
+        Color2 hairColor = requestNewColor2("Enter person's hair color ", stdInScanner);
         Country nationality = requestNewCountry(stdInScanner);
         Location location = requestNewLocation(stdInScanner);
         return new Person(height, eyeColor, hairColor, nationality, location);

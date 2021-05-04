@@ -77,7 +77,6 @@ public final class XMLCollectionProcessor {
         }
         catch (XStreamException | IOException e ) {
             System.out.println(ERROR_MESSAGE);
-            System.exit(1);
         }
         return result;
     }

@@ -18,7 +18,8 @@ public class MetaInformationTargetCollection implements IMetainfo {
 
     public void addToHistory(String command) {
         history.addFirst(command);
-        history.removeLast();
+        if (history.size() == 12)
+            history.removeLast();
     }
 
     public String getStringifiedHistory() {

@@ -20,16 +20,15 @@ public final class CLIObjectCreator {
 
     public static Ticket requestNewTicket(int id, Scanner stdInScanner) {
         // Used to parse name field in Ticket class
-        Function<String, String> nameParser = (input) -> { 
-            if (input == "") 
-                throw new IllegalArgumentException("Name can't be an empty string");
-            else
-                return input;
-        };
-        String name = FieldRequester.parseField(nameParser, "Enter a name: ", true, stdInScanner);
+        String name = FieldRequester.parseField(input -> input, "Enter a name: ", false, stdInScanner);
         Coordinates coords = requestNewCoordinate(stdInScanner);
 
-        long price = FieldRequester.parseField(Long::parseLong, 
+        Function<String, Long> priceParser = (input) -> { 
+            long price = Long.parseLong(input);
+            if ( price <= 0 ) throw new IllegalArgumentException("Price must be positive");
+            return price;
+        };
+        long price = FieldRequester.parseField(priceParser, 
                 "Enter a price (integer or empty string): ", false, stdInScanner);
         
         Function<String, Double> discountParser = (input) -> { 
@@ -98,8 +97,14 @@ public final class CLIObjectCreator {
     }
 
     public static Person requestNewPerson(Scanner stdInScanner) {
-        float height = FieldRequester.parseField(Float::parseFloat, 
+        Function<String, Float> parseHeight = (input) -> {
+            float height = Float.parseFloat(input);
+            if (height <= 0) throw new IllegalArgumentException("Height must be positive");
+            return height;
+        };
+        float height = FieldRequester.parseField(parseHeight, 
                 "Enter person's height (float or empty string): ", false, stdInScanner);
+
         Color eyeColor = requestNewColor("Enter person's eye color ", stdInScanner);
         Color2 hairColor = requestNewColor2("Enter person's hair color ", stdInScanner);
         Country nationality = requestNewCountry(stdInScanner);
@@ -113,5 +118,6 @@ public final class CLIObjectCreator {
         double z = FieldRequester.parseField(Double::parseDouble, "Enter z coordinate: ", false, stdInScanner);
 
         return new Location(x, y, z);
+        
     }
 }

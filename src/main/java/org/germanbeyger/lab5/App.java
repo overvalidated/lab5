@@ -11,7 +11,7 @@ import org.germanbeyger.lab5.commands.Commands;
 
 public class App {
     private static TargetCollection targetCollection;
-    static String collectionPath = "collection.xml";
+    static String collectionPath;
 
     public static void promptNewCollection(Scanner stdInScanner) {
         //
@@ -27,8 +27,7 @@ public class App {
         };
         boolean createNew = FieldRequester.parseField(parseAnswer,
                 "Create new? (y/n): ", false, stdInScanner);
-        if (!createNew)
-            System.exit(0);
+        if (!createNew) System.exit(0);
         collectionPath = FieldRequester.parseField((input) -> input, "Enter filename: ", false, stdInScanner);
         targetCollection = new TargetCollection();
     }
@@ -59,10 +58,13 @@ public class App {
                 nextCommand = stdInScanner.nextLine();
                 executeCommand(nextCommand, stdInScanner);
             }
-        }  catch (NoSuchElementException e) { 
+        }  catch (NoSuchElementException | IllegalStateException e) { 
             System.out.println("End of transmission. Interrupting execution...");
-            return;
-        }
+            System.exit(1);
+        }  catch (Exception e) { 
+            System.out.println("Something bad happened. We can\'t continue...");
+            System.exit(1);
+        } 
 
         // loading data from file
         // data loaded

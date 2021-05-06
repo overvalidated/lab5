@@ -15,8 +15,7 @@ public class Coordinates{
     public boolean verify() {
         return x <= 643;
     }
-
-
+    
     @Override
     public String toString() {
         return "{" +

@@ -1,6 +1,7 @@
 package org.germanbeyger.lab5;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -48,11 +49,10 @@ public final class XMLCollectionProcessor {
             fstream.write(xml);
         } 
         catch (FileNotFoundException e) {
-            System.out.printf("The file %s can't be opened for writing. \n", filepath);
-            
+            System.out.printf("File %s can't be opened for writing. \n", filepath);
         }
         catch (XStreamException e) {
-            
+            System.out.println("Unable to convert in XML.");
         }
         finally {
             if (fstream != null)
@@ -61,6 +61,11 @@ public final class XMLCollectionProcessor {
 	}
 
     public static TargetCollection load(String filepath) {
+        if (!(new File(filepath)).canRead()) {
+            System.out.println("Can't read file.");
+            return null;
+        }
+
         final String ERROR_MESSAGE = "Oops! Something isn't okay and we can't load a collection. ";
         XStream xstream = createXStream();
         TargetCollection result = null;
@@ -68,11 +73,10 @@ public final class XMLCollectionProcessor {
         try (FileInputStream fstream = new FileInputStream(filepath)) {
             InputStreamReader inputStream = new InputStreamReader(fstream);
             BufferedReader bufStream = new BufferedReader(inputStream); 
-
             String xml = bufStream.readLine(); 
             result = (TargetCollection)xstream.fromXML(xml);
         } catch (FileNotFoundException e) {
-            System.out.printf("Problems accessing this file %s. \n", filepath);
+            System.out.printf("File %s can't be opened for reading. \n", filepath);
         } catch (XStreamException | IOException e ) {
             System.out.println(ERROR_MESSAGE);
         }

@@ -3,6 +3,7 @@ package org.germanbeyger.lab5.commands;
 import java.rmi.NoSuchObjectException;
 import java.util.Scanner;
 
+import org.germanbeyger.lab5.App;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 import org.germanbeyger.lab5.interfaces.IExecutor;
 

@@ -22,15 +22,14 @@ public class MetaInformationTargetCollection implements IMetainfo {
 
     public void addToHistory(String command) {
         history.addFirst(command);
-        if (history.size() == 12)
-            history.removeLast();
+        if (history.size() == 12) history.removeLast();
     }
 
     public String getStringifiedHistory() {
         int i = 0;
         String historyAsString = "";
         for (String element : history) {
-            i += 1;
+            i++;
             historyAsString += String.format("%d) %s\n", i, element);
         }
         return historyAsString;

@@ -4,10 +4,14 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.function.Function;
 
+import org.germanbeyger.lab5.App;
+
 /**
  * 
  */
 public class FieldRequester {
+    public static boolean fromFile = false;
+
     /**
      * 
      * @param <T>
@@ -28,9 +32,10 @@ public class FieldRequester {
             try {
                 // Retrieving the entire line
                 requestString = stdInScanner.nextLine();
-            } catch (NoSuchElementException e) {
+            } catch (NoSuchElementException | IllegalStateException e) {
                 // If no line -> exit the app. It's most probably a ctrl+d. 
                 System.out.println("End of transmission. Interrupting execution...");
+                //throw new NoSuchElementException()
                 System.exit(1);
             }
             // If result is an empty string and we support empty values (aka nulls) then return null;
@@ -43,6 +48,7 @@ public class FieldRequester {
                 parsedValue = stringParser.apply(requestString);
                 break;
             } catch (Exception e) {
+                if (fromFile) throw new IllegalArgumentException("Input in script doesn't fit the conditions it's supposed to.");
                 System.out.println("Something went wrong while parsing. Please enter the value again.");
             }
         }

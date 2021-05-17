@@ -34,6 +34,7 @@ public class App {
     }
 
     public static void main(String[] args ) {
+        try {
         // we expect only filepath as arguments
         if (args.length != 1) {
             System.out.printf("Wrong number of arguments: expected 1, got %d\n", args.length);
@@ -63,9 +64,9 @@ public class App {
             System.out.println("End of transmission. Interrupting execution...");
             return;
         }
-
-        // loading data from file
-        // data loaded
+    } catch (Exception e) {
+        System.out.println("Unexpected uncatch exception: exiting...");
+    }
     }
 
     public static void executeCommand(String command, Scanner stdInScanner) {

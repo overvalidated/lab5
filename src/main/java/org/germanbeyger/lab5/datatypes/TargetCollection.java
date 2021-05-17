@@ -26,11 +26,15 @@ public class TargetCollection implements ITargetCollection {
                 .map(input -> input.getId())
                 .collect(Collectors.toList()));
         ids.sort(Integer::compareTo);
-        int prev = ids.get(0);
-        for (int i = 1; i < ids.size()-2; i++) {
-            if (ids.get(i).equals(prev)) {
-                return false;
+        try {
+            int prev = ids.get(0);
+            for (int i = 1; i < ids.size()-2; i++) {
+                if (ids.get(i).equals(prev)) {
+                    return false;
+                }
             }
+        } catch (IndexOutOfBoundsException e) {
+            return true;    
         }
         return targetCollection.stream().allMatch(input -> input.verify()) && metainfo.verify();
     }

@@ -26,11 +26,11 @@ public final class CLIObjectCreator {
             else
                 return input;
         };
-        String name = FieldRequester.parseField(nameParser, "Enter a name: ", true, stdInScanner);
+        String name = FieldRequester.parseField(nameParser, "Enter a name: ", false, stdInScanner);
         Coordinates coords = requestNewCoordinate(stdInScanner);
 
         long price = FieldRequester.parseField(Long::parseLong, 
-                "Enter a price (integer or empty string): ", false, stdInScanner);
+                "Enter a price (integer): ", false, stdInScanner);
         
         Function<String, Double> discountParser = (input) -> { 
             double discount = Double.parseDouble(input);
@@ -39,7 +39,7 @@ public final class CLIObjectCreator {
             return discount;
         };
         double discount = FieldRequester.parseField(discountParser, 
-                "Enter discount percent (0-100 or empty string): ", false, stdInScanner);
+                "Enter discount percent (0-100): ", false, stdInScanner);
 
         Function<String, Boolean> parseRefundable = (input) -> {
             switch (input) {
@@ -99,7 +99,7 @@ public final class CLIObjectCreator {
 
     public static Person requestNewPerson(Scanner stdInScanner) {
         float height = FieldRequester.parseField(Float::parseFloat, 
-                "Enter person's height (float or empty string): ", false, stdInScanner);
+                "Enter person's height (float): ", false, stdInScanner);
         Color eyeColor = requestNewColor("Enter person's eye color ", stdInScanner);
         Color2 hairColor = requestNewColor2("Enter person's hair color ", stdInScanner);
         Country nationality = requestNewCountry(stdInScanner);

@@ -1,2 +1,2 @@
 web: java $JAVA_OPTS -cp target/lab5-1.0-SNAPSHOT.jar org.germanbeyger.lab5.Server $PORT
-web2: java $JAVA_OPTS -cp target/lab5-1.0-SNAPSHOT.jar org.germanbeyger.lab5.Client https://itmo-server-lab6.herokuapp.com $PORT
+web: java $JAVA_OPTS -cp target/lab5-1.0-SNAPSHOT.jar org.germanbeyger.lab5.Client https://itmo-server-lab6.herokuapp.com $PORT

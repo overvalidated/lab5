@@ -3,6 +3,7 @@ package org.germanbeyger.lab5;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.StreamCorruptedException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
@@ -67,6 +68,8 @@ public class Server {
                             }
                         } catch (ClassNotFoundException ex) {
                             ex.printStackTrace(); // remove it later
+                        } catch (StreamCorruptedException ex) {
+                            ex.printStackTrace();
                         }
 
                     }

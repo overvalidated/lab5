@@ -1,10 +1,14 @@
-package org.germanbeyger.lab5.server_commands;
+package org.germanbeyger.lab5.client_commands;
 
 import java.rmi.NoSuchObjectException;
 import java.util.Scanner;
 
+import org.germanbeyger.lab5.TransmissionInterrupted;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
+import org.germanbeyger.lab5.interfaces.ICommandCreator;
 import org.germanbeyger.lab5.interfaces.IExecutor;
+import org.germanbeyger.lab5.server_commands.SendableCommand;
+
 /**
  * Class for storing and invoking every available interactive command
  * <p>
@@ -27,14 +31,13 @@ public enum Commands {
     PRINT_UNIQUE_TYPE ("print_unique_type", PrintUniqueType::execute),
     REMOVE_BY_ID   ("remove_by_id",   RemoveById::execute),
     REMOVE_GREATER ("remove_greater", RemoveGreater::execute),
-    SAVE   ("save", Save::execute),
     SHOW   ("show", Show::execute),
     UPDATE ("update", Update::execute);
 
     private String    name;
-    private IExecutor execCommand;
+    private ICommandCreator execCommand;
 
-    Commands(String name, IExecutor execCommand) {
+    Commands(String name, ICommandCreator execCommand) {
         this.name = name;
         this.execCommand = execCommand;
     }
@@ -49,16 +52,26 @@ public enum Commands {
      * @param stdInScanner Scanner with System.in (passed from main)
      * @throws NoSuchObjectException if command was not found.
      */
-    public static String invokeCommand(SendableCommand commandReceived, TargetCollection targetCollection) throws NoSuchObjectException {
-        final String COMMAND_NAME = commandReceived.getCommandName();
-        for (Commands command : Commands.values()) {
-            if (COMMAND_NAME.equals(command.getName())) {
-                return command.execute(commandReceived, targetCollection);
+    public static SendableCommand invokeCommand(String[] args, Scanner stdInScanner) throws NoSuchObjectException, TransmissionInterrupted {
+        final String COMMAND_NAME = args[0];
+        SendableCommand sendableCommand = null;
+        
+        switch (COMMAND_NAME) {
+            case "execute_script": ExecuteScript.executeScript(args[1]); return null; 
+            case "exit": Exit.execute(); return null;
+            case "help": Help.execute(); return null;
+            default:
+            for (Commands command : Commands.values()) {
+                if (COMMAND_NAME.equals(command.getName())) {
+                    sendableCommand = command.execute(args, stdInScanner);
+                    return sendableCommand;
+                }
             }
+            throw new NoSuchObjectException (
+                String.format("Command \"%s\" was not found.\n", COMMAND_NAME)
+            );
         }
-        throw new NoSuchObjectException(
-            String.format("Command \"%s\" was not found.", COMMAND_NAME)
-        );
+
     }
 
     /**
@@ -67,8 +80,7 @@ public enum Commands {
      * @param targetCollection
      * @param stdInScanner
      */
-    public String execute(SendableCommand command, TargetCollection targetCollection) {
-        targetCollection.addToHistory(this.name);
-        return execCommand.execute(command, targetCollection);
+    public SendableCommand execute(String[] args, Scanner stdInScanner) throws TransmissionInterrupted {
+        return execCommand.execute(args, stdInScanner);
     }
 }

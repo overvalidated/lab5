@@ -7,7 +7,7 @@ import org.germanbeyger.lab5.datatypes.TargetCollection;
 public final class Info {
     private Info() {}
 
-    public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {
-        System.out.println(targetCollection.getInfoAboutCollection());
+    public static String execute(SendableCommand command, TargetCollection targetCollection) {
+       return targetCollection.getInfoAboutCollection();
     }
 }

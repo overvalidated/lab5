@@ -1,9 +1,8 @@
 package org.germanbeyger.lab5.interfaces;
 
-import java.util.Scanner;
-
 import org.germanbeyger.lab5.datatypes.TargetCollection;
+import org.germanbeyger.lab5.server_commands.SendableCommand;
 
 public interface IExecutor {
-    public void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner);
+    public String execute(SendableCommand command, TargetCollection targetCollection);
 }

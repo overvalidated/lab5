@@ -1,22 +1,24 @@
 package org.germanbeyger.lab5.server_commands;
 
-import java.util.Scanner;
+import java.util.NoSuchElementException;
 
-import org.germanbeyger.lab5.cli.CLIObjectCreator;
-import org.germanbeyger.lab5.cli.FieldRequester;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
-import org.germanbeyger.lab5.datatypes.Ticket;
+
 
 public final class Update {
     private Update() {}
 
-    public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {
+    public static String execute(SendableCommand command, TargetCollection targetCollection) {
+        String result = "";
         try {
-            int idx = FieldRequester.retrieveArgument(commandArgs, Integer::parseInt);
-            Ticket replacementTicket = CLIObjectCreator.requestNewTicket(targetCollection.getNextId(), stdInScanner);
-            targetCollection.update(idx, replacementTicket);
+            targetCollection.update(Integer.parseInt(command.getArgs()[0]), 
+                    command.getTicket());
         } catch (IllegalArgumentException e) {
-            System.out.println("The argument to this command must be an integer. ");
+            result = "The argument to this command must be an integer. ";
+        } catch (NoSuchElementException e) {
+            result = "Index not found in collection. ";
         }
+        return result;
+        
     }
 }

@@ -9,8 +9,8 @@ import org.germanbeyger.lab5.datatypes.Ticket;
 public final class RemoveGreater{
     private RemoveGreater() {}
 
-    public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {
-        Ticket ticketToCompare = CLIObjectCreator.requestNewTicket(targetCollection.getNextId(), stdInScanner);
-        targetCollection.removeIf(ticket -> ticket.compareTo(ticketToCompare) > 0);
+    public static String execute(SendableCommand command, TargetCollection targetCollection) {
+        targetCollection.removeIf(ticket -> ticket.compareTo(command.getTicket()) > 0);
+        return "";
     }
 }

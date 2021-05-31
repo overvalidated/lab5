@@ -1,5 +1,6 @@
 package org.germanbeyger.lab5.cli;
 
+import org.germanbeyger.lab5.TransmissionInterrupted;
 import org.germanbeyger.lab5.datatypes.*;
 
 import java.util.Arrays;
@@ -18,7 +19,7 @@ public final class CLIObjectCreator {
     // This class MUST NOT BE INSTANTIATED!
     private CLIObjectCreator() { }
 
-    public static Ticket requestNewTicket(int id, Scanner stdInScanner) {
+    public static Ticket requestNewTicket(Scanner stdInScanner) throws TransmissionInterrupted {
         // Used to parse name field in Ticket class
         Function<String, String> nameParser = (input) -> { 
             if (input.isEmpty()) 
@@ -55,10 +56,10 @@ public final class CLIObjectCreator {
         
         TicketType ticketType = requestNewTicketType(stdInScanner);
         Person person = requestNewPerson(stdInScanner);
-        return new Ticket(id, name, coords, price, discount, refundable, ticketType, person);
+        return new Ticket(name, coords, price, discount, refundable, ticketType, person);
     }
 
-    public static Coordinates requestNewCoordinate(Scanner stdInScanner) {
+    public static Coordinates requestNewCoordinate(Scanner stdInScanner) throws TransmissionInterrupted {
         Function<String, Long> xCoordinateParser = (input) -> {
             long x = Long.parseLong(input);
             if (x > 643) throw new IllegalArgumentException("X must be less or equal to 643");
@@ -71,32 +72,32 @@ public final class CLIObjectCreator {
     }
 
 
-    public static TicketType requestNewTicketType(Scanner stdInScanner) {
+    public static TicketType requestNewTicketType(Scanner stdInScanner) throws TransmissionInterrupted {
         return FieldRequester.parseField(
                 TicketType::valueOf, 
                 String.format("Enter ticket type (values allowed are %s): ", Arrays.asList(TicketType.values())), 
                 false, stdInScanner);
     }
 
-    public static Color requestNewColor(String requestText, Scanner stdInScanner) {
+    public static Color requestNewColor(String requestText, Scanner stdInScanner) throws TransmissionInterrupted {
         return FieldRequester.parseField(Color::valueOf, 
                 String.format("%s (values allowed are %s): ", requestText, Arrays.asList(Color.values())),
                 false, stdInScanner);
     }
 
-    public static Color2 requestNewColor2(String requestText, Scanner stdInScanner) {
+    public static Color2 requestNewColor2(String requestText, Scanner stdInScanner) throws TransmissionInterrupted {
         return FieldRequester.parseField(Color2::valueOf, 
                 String.format("%s (values allowed are %s): ", requestText, Arrays.asList(Color2.values())),
                 false, stdInScanner);
     }
 
-    public static Country requestNewCountry(Scanner stdInScanner) {
+    public static Country requestNewCountry(Scanner stdInScanner) throws TransmissionInterrupted {
         return FieldRequester.parseField(Country::valueOf, 
         String.format("Enter person's nationality (values allowed are %s): ", Arrays.asList(Country.values())),
         false, stdInScanner);
     }
 
-    public static Person requestNewPerson(Scanner stdInScanner) {
+    public static Person requestNewPerson(Scanner stdInScanner) throws TransmissionInterrupted {
         float height = FieldRequester.parseField(Float::parseFloat, 
                 "Enter person's height (float): ", false, stdInScanner);
         Color eyeColor = requestNewColor("Enter person's eye color ", stdInScanner);
@@ -106,7 +107,7 @@ public final class CLIObjectCreator {
         return new Person(height, eyeColor, hairColor, nationality, location);
     }
     
-    public static Location requestNewLocation(Scanner stdInScanner) {
+    public static Location requestNewLocation(Scanner stdInScanner) throws TransmissionInterrupted {
         double x = FieldRequester.parseField(Double::parseDouble, "Enter x coordinate: ", false, stdInScanner);
         Long y = FieldRequester.parseField(Long::parseLong, "Enter y coordinate (Long or empty string): ", true, stdInScanner);
         double z = FieldRequester.parseField(Double::parseDouble, "Enter z coordinate: ", false, stdInScanner);

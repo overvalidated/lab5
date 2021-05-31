@@ -75,6 +75,12 @@ public class TargetCollection implements ITargetCollection {
 
     public void add(Ticket ticket) {
         nextId++;
+        ticket.setId(nextId);
+        if (maxTicket == null) {
+            maxTicket = ticket;
+        } else if (ticket.compareTo(maxTicket) > 0) {
+            maxTicket = ticket;
+        }
         targetCollection.add(ticket);
     }
 
@@ -112,22 +118,14 @@ public class TargetCollection implements ITargetCollection {
         return sortedCollection;
     }
 
-    public void remove(int idxTicket) { 
-        try {
-            int idxReal = identifyTicket(idxTicket);
-            targetCollection.remove(idxReal);
-        } catch (NoSuchElementException e) {
-            System.out.println(e.getMessage());
-        }
+    public void remove(int idxTicket) throws NoSuchElementException{ 
+        int idxReal = identifyTicket(idxTicket);
+        targetCollection.remove(idxReal);
     }
 
-    public void update(int idx, Ticket ticket) {
-        try {
-            int idxReal = identifyTicket(idx);
-            targetCollection.set(idxReal, ticket);
-        } catch (NoSuchElementException e) {
-            System.out.println(e.getMessage());
-        }
+    public void update(int idx, Ticket ticket) throws NoSuchElementException {
+        int idxReal = identifyTicket(idx);
+        targetCollection.set(idxReal, ticket);
         
     }
 

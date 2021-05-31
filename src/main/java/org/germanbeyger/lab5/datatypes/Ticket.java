@@ -1,4 +1,7 @@
 package org.germanbeyger.lab5.datatypes;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Date;
@@ -16,10 +19,10 @@ import java.util.Date;
  */
 public class Ticket implements Comparable<Ticket>, Serializable {
     private static final long serialVersionUID = 1L;
-    private int id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    private transient int id = 1; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
-    private Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private transient Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private long price; //Значение поля должно быть больше 0
     private double discount; //Значение поля должно быть больше 0, Максимальное значение поля: 100
     private boolean refundable;
@@ -42,7 +45,7 @@ public class Ticket implements Comparable<Ticket>, Serializable {
      * @param person {@link Person}
      * @throws IllegalArgumentException if entered or loaded values do not fit the conditions.
      */
-    public Ticket(int id, String name, Coordinates coordinates, Date creationDate, 
+    public Ticket(String name, Coordinates coordinates, Date creationDate, 
             long price, double discount, boolean refundable, 
             TicketType type, Person person) throws IllegalArgumentException {
         
@@ -59,7 +62,6 @@ public class Ticket implements Comparable<Ticket>, Serializable {
             throw new IllegalArgumentException("Discount must be positive and less than 100");
 
         // Assigning fields
-        this.id = id;
         this.name = name;
         this.coordinates = coordinates;
         this.creationDate = creationDate;
@@ -85,12 +87,10 @@ public class Ticket implements Comparable<Ticket>, Serializable {
      * @param person
      * @throws IllegalArgumentException
      */
-    public Ticket(int id, String name, Coordinates coordinates, long price, double discount, boolean refundable, 
+    public Ticket(String name, Coordinates coordinates, long price, double discount, boolean refundable, 
             TicketType type, Person person) throws IllegalArgumentException {
-        this(id, name, coordinates, Date.from(Instant.now()), price, discount, refundable, type, person);
+        this(name, coordinates, Date.from(Instant.now()), price, discount, refundable, type, person);
     }
-
-    
     /**
      * <p>
      * Ticket is compared to another ticket by price, then by {@link TicketType} and then by the creation date.
@@ -121,7 +121,7 @@ public class Ticket implements Comparable<Ticket>, Serializable {
             ", creationDate='" + getCreationDate() + "'" +
             ", price='" + getPrice() + "'" +
             ", discount='" + getDiscount() + "'" +
-            ", refundable='" + isRefundable() + "'" +
+            ", refundable='" + getRefundable() + "'" +
             ", type='" + getType() + "'" +
             ", person='" + getPerson() + "'" +
             "}";
@@ -135,8 +135,36 @@ public class Ticket implements Comparable<Ticket>, Serializable {
         return (getCoordinates().verify() && getPerson().verify());
     }
 
+    private void readObject(ObjectInputStream aInputStream) throws ClassNotFoundException, IOException 
+    {       
+        this.name = aInputStream.readUTF();
+        this.coordinates = (Coordinates) aInputStream.readObject();
+        this.creationDate = Date.from(Instant.now());
+        this.price = aInputStream.readLong();
+        this.discount = aInputStream.readDouble();
+        this.refundable = aInputStream.readBoolean();
+        this.type = (TicketType) aInputStream.readObject();
+        this.person = (Person) aInputStream.readObject(); 
+    }
+
+    private void writeObject(ObjectOutputStream aOutputStream) throws IOException 
+    {
+        aOutputStream.writeUTF(getName());
+        aOutputStream.writeObject(getCoordinates());
+        aOutputStream.writeLong(getPrice());
+        aOutputStream.writeDouble(getDiscount());
+        aOutputStream.writeBoolean(getRefundable());
+        aOutputStream.writeLong(getPrice());
+        aOutputStream.writeObject(getType());
+        aOutputStream.writeObject(getPerson());
+    }
+
     public int getId() {
         return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -160,10 +188,6 @@ public class Ticket implements Comparable<Ticket>, Serializable {
     }
 
     public Boolean getRefundable() {
-        return this.refundable;
-    }
-
-    public Boolean isRefundable() {
         return this.refundable;
     }
 

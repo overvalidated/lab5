@@ -22,9 +22,9 @@ public interface ITargetCollection extends Iterable<Ticket> {
     void removeIf(Predicate<Ticket> predicate); // оставить элементы, подходящие под условие
     LinkedList<Ticket> filter(Predicate<Ticket> predicate);
 
-    int getNextId();
     String getInfoAboutCollection();
     int countElements(); // returns number of elements in collection
+    int getNextId();
 
     boolean verify();
 }

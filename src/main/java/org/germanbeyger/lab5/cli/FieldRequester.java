@@ -4,6 +4,8 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.function.Function;
 
+import org.germanbeyger.lab5.TransmissionInterrupted;
+
 /**
  * 
  */
@@ -18,7 +20,7 @@ public class FieldRequester {
      * @return
      */
     public static <T> T parseField(Function<String, T> stringParser,
-             String requestMessage, boolean supportNull, Scanner stdInScanner) {
+             String requestMessage, boolean supportNull, Scanner stdInScanner) throws TransmissionInterrupted {
         
         T parsedValue = null;
         while (true) {
@@ -30,8 +32,9 @@ public class FieldRequester {
                 requestString = stdInScanner.nextLine();
             } catch (NoSuchElementException e) {
                 // If no line -> exit the app. It's most probably a ctrl+d. 
-                System.out.println("End of transmission. Interrupting execution...");
-                System.exit(1);
+                // System.out.println("End of transmission. Interrupting execution...");
+                // System.exit(1);
+                throw new TransmissionInterrupted();
             }
             // If result is an empty string and we support empty values (aka nulls) then return null;
             if (supportNull && requestString.isEmpty()) 

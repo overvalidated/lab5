@@ -8,8 +8,9 @@ import org.germanbeyger.lab5.datatypes.TargetCollection;
 public final class Save {
     private Save() {}
 
-    public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {
-        XMLCollectionProcessor.save(targetCollection, commandArgs[1]);
+    public static String execute(SendableCommand command, TargetCollection targetCollection) {
+        XMLCollectionProcessor.save(targetCollection, command.getArgs()[1]);
+        return "";
     }
     
 }

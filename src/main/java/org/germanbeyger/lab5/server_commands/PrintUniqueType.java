@@ -10,11 +10,10 @@ import org.germanbeyger.lab5.datatypes.TicketType;
 public final class PrintUniqueType {
     private PrintUniqueType() {}
 
-    public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {
+    public static String execute(SendableCommand command, TargetCollection targetCollection) {
         TreeSet<TicketType> uniqueTypes = new TreeSet<>();
         for (Ticket ticket : targetCollection) 
             uniqueTypes.add(ticket.getType());
-        System.out.printf("Unique types in collection: %s\n", uniqueTypes);
-        
+        return String.format("Unique types in collection: %s\n", uniqueTypes);
     }
 }

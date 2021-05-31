@@ -1,15 +1,15 @@
 package org.germanbeyger.lab5.server_commands;
 
-import java.util.Scanner;
-
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 import org.germanbeyger.lab5.datatypes.Ticket;
 
 public final class Show {
     private Show() {}
 
-    public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {
+    public static String execute(SendableCommand command, TargetCollection targetCollection) {
+        String result = "";
         for (Ticket ticket : targetCollection)
-            System.out.println(ticket);
+            result += ticket.toString() + '\n';
+        return result;
     }
 }

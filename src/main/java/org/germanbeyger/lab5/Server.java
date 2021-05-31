@@ -14,7 +14,6 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
-
 import org.germanbeyger.lab5.commands.SendableCommand;
 
 /**
@@ -29,7 +28,7 @@ public class Server {
         Selector connectionSelector = Selector.open();
 
         sChannel = ServerSocketChannel.open();
-        sChannel.socket().bind(new InetSocketAddress("itmo-server-lab6.herokuapp.com", 0));
+        sChannel.socket().bind(new InetSocketAddress(PORT));
         System.out.println(sChannel.getLocalAddress());
         sChannel.configureBlocking(false);
         sChannel.register(connectionSelector, SelectionKey.OP_ACCEPT);

@@ -71,8 +71,9 @@ public class Server {
                             Object deserialized = objStream.readObject();
                             if (deserialized instanceof SendableCommand) {
                                 SendableCommand command = (SendableCommand) deserialized;
-                                //System.out.println(command);
-                                //System.out.printf("Ticket verification: %b\n", command.getTicket().verify());
+                                System.out.println(command);
+                                System.out.printf("Ticket verification: %b\n", command.getTicket().verify());
+                                System.exit(-1);
                             }
                         } catch (ClassNotFoundException ex) {
                             ex.printStackTrace(); // remove it later

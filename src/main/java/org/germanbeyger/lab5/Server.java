@@ -69,7 +69,6 @@ public class Server {
 
         initializeCollection(args);
 
-        args = new String[] {"5000"};
         final int PORT = Integer.parseInt(args[0]);
         System.out.println(PORT);
 

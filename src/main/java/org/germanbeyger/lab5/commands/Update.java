@@ -7,7 +7,7 @@ import org.germanbeyger.lab5.cli.FieldRequester;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 import org.germanbeyger.lab5.datatypes.Ticket;
 
-public final class Update {
+public final class Update extends Executable {
     private Update() {}
 
     public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {

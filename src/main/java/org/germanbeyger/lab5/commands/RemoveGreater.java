@@ -6,7 +6,7 @@ import org.germanbeyger.lab5.cli.CLIObjectCreator;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 import org.germanbeyger.lab5.datatypes.Ticket;
 
-public final class RemoveGreater {
+public final class RemoveGreater extends Executable {
     private RemoveGreater() {}
 
     public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {

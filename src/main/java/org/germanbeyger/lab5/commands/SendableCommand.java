@@ -9,8 +9,9 @@ import org.germanbeyger.lab5.interfaces.IExecutor;
  * Class used for commands serialization
  */
 public abstract class SendableCommand implements IExecutor, Serializable {
+    private final static long serialVersionUID = 1L;
     private String[] args;
-    private SendableCommand commandNumber;
+    private Command commandNumber;
 
     public SendableCommand(String[] args, final String commandName) {
         this.args = args;

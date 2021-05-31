@@ -5,7 +5,7 @@ import java.util.Scanner;
 import org.germanbeyger.lab5.cli.CLIObjectCreator;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 
-public final class AddIfMax {
+public final class AddIfMax extends Executable {
     private AddIfMax() {}
 
     public static void execute(String[] args, TargetCollection targetCollection, Scanner stdInScanner) {

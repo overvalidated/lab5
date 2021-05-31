@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 
-public final class History {
+public final class History extends Executable {
     private History() {}
 
     public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {

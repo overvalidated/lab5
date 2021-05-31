@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 
-public final class Help implements Serializable {
+public final class Help extends Executable {
     private Help() {}
 
     public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {

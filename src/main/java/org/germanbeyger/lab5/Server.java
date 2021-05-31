@@ -61,7 +61,6 @@ public class Server {
 
                 if (key.isReadable()) {
                     try {
-                        System.out.println("Data incoming...");
                         SocketChannel socketChannel = (SocketChannel) key.channel();
                         ByteBuffer buffer = ByteBuffer.allocate(8192);
                         int bytesRead = socketChannel.read(buffer);
@@ -69,6 +68,7 @@ public class Server {
                             bytesRead = socketChannel.read(buffer);
                         }
                         if (buffer.position() == 0) continue;
+                        System.out.println("Data incoming...");
                         try {
                             ByteArrayInputStream bytesStream = new ByteArrayInputStream(buffer.array());
                             ObjectInputStream objStream = new ObjectInputStream(bytesStream);

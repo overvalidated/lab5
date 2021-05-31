@@ -1,15 +1,14 @@
 package org.germanbeyger.lab5.commands;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.germanbeyger.lab5.datatypes.Ticket;
-import org.germanbeyger.lab5.interfaces.IExecutor;
-
 
 /**
  * Class used for commands serialization
  */
-public abstract class SendableCommand implements IExecutor, Serializable {
+public class SendableCommand implements Serializable {
     private final static long serialVersionUID = 1L;
     private String[] args;
     private String commandName;
@@ -29,10 +28,35 @@ public abstract class SendableCommand implements IExecutor, Serializable {
         return args;
     }
 
-    public String getCommand() {
+    public String getCommandName() {
         return commandName;
     }
 
-    // public Command GetCommand
+    public Ticket getTicket() {
+        return ticket;
+    }
 
+    // public Command GetCommand
+    @Override
+    public String toString() {
+        return "{" + " args='" + getArgs() + "'" + ", commandName='" + getCommandName() + "'" + ", ticket='"
+                + getTicket() + "'" + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof SendableCommand)) {
+            return false;
+        }
+        SendableCommand sendableCommand = (SendableCommand) o;
+        return Objects.equals(args, sendableCommand.args) && Objects.equals(commandName, sendableCommand.commandName)
+                && Objects.equals(ticket, sendableCommand.ticket);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(args, commandName, ticket);
+    }
 }

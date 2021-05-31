@@ -5,7 +5,7 @@ import java.util.Scanner;
 import org.germanbeyger.lab5.cli.FieldRequester;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 
-public final class RemoveById extends Executable {
+public final class RemoveById {
     private RemoveById() {}
 
     public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {

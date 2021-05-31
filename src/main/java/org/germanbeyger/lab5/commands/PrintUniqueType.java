@@ -7,7 +7,7 @@ import org.germanbeyger.lab5.datatypes.TargetCollection;
 import org.germanbeyger.lab5.datatypes.Ticket;
 import org.germanbeyger.lab5.datatypes.TicketType;
 
-public final class PrintUniqueType extends Executable {
+public final class PrintUniqueType {
     private PrintUniqueType() {}
 
     public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {

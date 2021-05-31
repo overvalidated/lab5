@@ -5,7 +5,7 @@ import java.util.Scanner;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 import org.germanbeyger.lab5.datatypes.Ticket;
 
-public final class PrintDescending extends Executable {
+public final class PrintDescending {
     private PrintDescending() {}
 
     public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {

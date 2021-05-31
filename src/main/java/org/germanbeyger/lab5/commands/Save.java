@@ -5,7 +5,7 @@ import java.util.Scanner;
 import org.germanbeyger.lab5.XMLCollectionProcessor;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 
-public final class Save extends Executable {
+public final class Save {
     private Save() {}
 
     public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {

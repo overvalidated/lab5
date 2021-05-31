@@ -5,7 +5,7 @@ import java.util.Scanner;
 import org.germanbeyger.lab5.cli.CLIObjectCreator;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 
-public final class Add extends Executable {
+public final class Add  {
     private Add() {}
 
     public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {

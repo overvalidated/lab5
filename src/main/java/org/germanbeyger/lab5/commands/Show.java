@@ -5,7 +5,7 @@ import java.util.Scanner;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 import org.germanbeyger.lab5.datatypes.Ticket;
 
-public final class Show extends Executable {
+public final class Show {
     private Show() {}
 
     public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {

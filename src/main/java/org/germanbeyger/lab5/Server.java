@@ -57,9 +57,9 @@ public class Server {
                             bytesRead = socketChannel.read(buffer);
                         }
                         System.out.println("WTF???|");
-                        ByteArrayInputStream bytesStream = new ByteArrayInputStream(buffer.array());
-                        ObjectInputStream objStream = new ObjectInputStream(bytesStream);
                         try {
+                            ByteArrayInputStream bytesStream = new ByteArrayInputStream(buffer.array());
+                            ObjectInputStream objStream = new ObjectInputStream(bytesStream);
                             Object deserialized = objStream.readObject();
                             if (deserialized instanceof SendableCommand) {
                                 SendableCommand command = (SendableCommand) deserialized;

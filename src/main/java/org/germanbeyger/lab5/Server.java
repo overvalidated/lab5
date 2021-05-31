@@ -29,7 +29,7 @@ public class Server {
         Selector connectionSelector = Selector.open();
 
         sChannel = ServerSocketChannel.open();
-        sChannel.socket().bind(new InetSocketAddress("0.0.0.0", 0));
+        sChannel.socket().bind(new InetSocketAddress("itmo-server-lab6.herokuapp.com", 0));
         System.out.println(sChannel.getLocalAddress());
         sChannel.configureBlocking(false);
         sChannel.register(connectionSelector, SelectionKey.OP_ACCEPT);

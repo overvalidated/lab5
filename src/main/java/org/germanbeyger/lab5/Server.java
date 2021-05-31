@@ -55,7 +55,7 @@ public class Server {
                         while (bytesRead != -1) {
                             bytesRead = socketChannel.read(buffer);
                         }
-                        buffer.flip();
+                        System.out.println("WTF???|");
                         ByteArrayInputStream bytesStream = new ByteArrayInputStream(buffer.array());
                         ObjectInputStream objStream = new ObjectInputStream(bytesStream);
                         try {

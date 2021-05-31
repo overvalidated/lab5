@@ -1,6 +1,8 @@
 package org.germanbeyger.lab5;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channel;
@@ -10,6 +12,8 @@ import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Set;
+
+import org.germanbeyger.lab5.commands.SendableCommand;
 
 /**
  * Class responsible for running server
@@ -33,6 +37,7 @@ public class Server {
 
             // new tcp connection
             for (SelectionKey key : selectedKeys) {
+                
                 if (key.isAcceptable()) {
                     ServerSocketChannel serverChannel = (ServerSocketChannel) key.channel();
                     SocketChannel socketChannel = serverChannel.accept();
@@ -48,11 +53,22 @@ public class Server {
                         SocketChannel socketChannel = (SocketChannel) key.channel();
                         ByteBuffer buffer = ByteBuffer.allocate(1024);
                         int bytesRead = socketChannel.read(buffer);
-
                         while (bytesRead != -1) {
-                            buffer 
-                            int bytesRead = socketChannel.read(buffer);
+                            bytesRead = socketChannel.read(buffer);
                         }
+                        buffer.flip();
+                        ByteArrayInputStream bytesStream = new ByteArrayInputStream(buffer.array());
+                        ObjectInputStream objStream = new ObjectInputStream(bytesStream);
+                        try {
+                            Object deserialized = objStream.readObject();
+                            if (deserialized instanceof SendableCommand) {
+                                SendableCommand command = (SendableCommand) deserialized;
+                                System.out.println(command);
+                            }
+                        } catch (ClassNotFoundException ex) {
+                            ex.printStackTrace(); // remove it later
+                        }
+
                     }
                     catch (ClassCastException ex) {
                         ex.printStackTrace(); // remove it later

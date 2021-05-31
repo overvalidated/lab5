@@ -8,11 +8,11 @@ import org.germanbeyger.lab5.interfaces.IExecutor;
 /**
  * Class used for commands serialization
  */
-public abstract class Command implements IExecutor, Serializable {
+public abstract class SendableCommand implements IExecutor, Serializable {
     private String[] args;
-    private Command commandNumber;
+    private SendableCommand commandNumber;
 
-    public Command(String[] args, final String commandName) {
+    public SendableCommand(String[] args, final String commandName) {
         this.args = args;
         for (Commands commands : Commands.values()) {
             // todo add command creation

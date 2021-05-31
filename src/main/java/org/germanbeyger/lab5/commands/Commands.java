@@ -66,7 +66,7 @@ public enum Commands {
         );
     }
 
-    public static void invokeCommand(Command command) {
+    public static void invokeCommand(SendableCommand command) {
         
     }
 

@@ -19,6 +19,7 @@ import org.germanbeyger.lab5.commands.SendableCommand;
 public class Server {
     public static void main(String[] args) throws IOException {
         final int PORT = Integer.parseInt(args[0]);
+        System.out.println(PORT);
 
         ServerSocketChannel sChannel;
         Selector connectionSelector = Selector.open();

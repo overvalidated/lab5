@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 import org.germanbeyger.lab5.TransmissionInterrupted;
 import org.germanbeyger.lab5.cli.FieldRequester;
+import org.germanbeyger.lab5.datatypes.SendableCommand;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
-import org.germanbeyger.lab5.server_commands.SendableCommand;
 
 
 public final class ExecuteScript {

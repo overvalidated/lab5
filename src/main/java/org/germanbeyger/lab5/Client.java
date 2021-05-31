@@ -1,17 +1,17 @@
 package org.germanbeyger.lab5;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.Socket;
+import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.rmi.NoSuchObjectException;
 import java.util.Scanner;
 
-import org.germanbeyger.lab5.server_commands.SendableCommand;
 import org.germanbeyger.lab5.client_commands.Commands;
+import org.germanbeyger.lab5.datatypes.SendableCommand;
 
 public class Client {
     public static SendableCommand executeCommand(Scanner stdInScanner) {
@@ -34,26 +34,25 @@ public class Client {
         final int PORT = Integer.parseInt(args[1]);
         try (Scanner stdInScanner = new Scanner(System.in)) {
             while (true) {
-                try (Socket socket = new Socket(args[0], PORT);
+                try (//Socket socket = new Socket(args[0], PORT);
                     DatagramSocket datagramSocket = new DatagramSocket(PORT+1)) {
-                    OutputStream out = socket.getOutputStream();
+                    // OutputStream out = socket.getOutputStream();
                     
                     // commandArgs[0] is a main command
                     // commangdArgs[1] is an argument.
-                    // SendableCommand command = new SendableCommand(
-                            // Arrays.copyOfRange(commandArgs, 1, commandArgs.length), commandArgs[0]);
-                    ObjectOutputStream objStream = new ObjectOutputStream(out);
+                    ByteArrayOutputStream objectByteArray = new ByteArrayOutputStream();
+                    ObjectOutputStream objStream = new ObjectOutputStream(objectByteArray);
                     SendableCommand command = executeCommand(stdInScanner);
                     if (command != null) {
                         objStream.writeObject(command);
+                        byte[] commandBytes = objectByteArray.toByteArray();
+                        datagramSocket.send(new DatagramPacket(commandBytes, commandBytes.length, new InetSocketAddress("localhost", PORT)));
                         System.out.println("Sent!");
-                        out.flush();
                     }
-                    out.close();
                     
-                    byte[] responseBuffer = new byte[65508];
-                    DatagramPacket response = new DatagramPacket(responseBuffer, responseBuffer.length);
-                    datagramSocket.receive(response);
+                    // byte[] responseBuffer = new byte[65508];
+                    // DatagramPacket response = new DatagramPacket(responseBuffer, responseBuffer.length);
+                    // datagramSocket.receive(response);
 
                 } catch (UnknownHostException ex) {
                     System.out.println("The hostname is unknown. ");

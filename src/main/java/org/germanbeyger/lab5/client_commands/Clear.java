@@ -2,8 +2,8 @@ package org.germanbeyger.lab5.client_commands;
 
 import java.util.Scanner;
 
+import org.germanbeyger.lab5.datatypes.SendableCommand;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
-import org.germanbeyger.lab5.server_commands.SendableCommand;
 
 public final class Clear  {
     private Clear() {}

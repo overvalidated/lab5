@@ -20,12 +20,13 @@ public class FieldRequester {
      * @return
      */
     public static <T> T parseField(Function<String, T> stringParser,
-             String requestMessage, boolean supportNull, Scanner stdInScanner) throws TransmissionInterrupted {
+             String requestMessage, boolean supportNull, Scanner stdInScanner, boolean showMessage) throws TransmissionInterrupted {
         
         T parsedValue = null;
         while (true) {
             // Prompting for input
-            System.out.println(requestMessage);
+            if (showMessage) 
+                System.out.println(requestMessage);
             String requestString = null;
             try {
                 // Retrieving the entire line
@@ -46,6 +47,7 @@ public class FieldRequester {
                 parsedValue = stringParser.apply(requestString);
                 break;
             } catch (Exception e) {
+                if (showMessage)
                 System.out.println("Something went wrong while parsing. Please enter the value again.");
             }
         }

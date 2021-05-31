@@ -1,6 +1,8 @@
 package org.germanbeyger.lab5.server_commands;
 
 import java.util.LinkedList;
+
+import org.germanbeyger.lab5.datatypes.SendableCommand;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 import org.germanbeyger.lab5.datatypes.Ticket;
 

@@ -1,5 +1,6 @@
 package org.germanbeyger.lab5.server_commands;
 
+import org.germanbeyger.lab5.datatypes.SendableCommand;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 
 public final class Add  {

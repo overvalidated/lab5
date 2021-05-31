@@ -1,9 +1,8 @@
-package org.germanbeyger.lab5.server_commands;
+package org.germanbeyger.lab5.datatypes;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.Objects;
-
-import org.germanbeyger.lab5.datatypes.Ticket;
 
 /**
  * Class used for commands serialization
@@ -13,6 +12,7 @@ public class SendableCommand implements Serializable {
     private String[] args;
     private String commandName;
     private Ticket ticket = null;
+    private LinkedList<SendableCommand> commandList = null;
 
     public SendableCommand(String[] args, String commandName) {
         this.args = args;
@@ -22,6 +22,11 @@ public class SendableCommand implements Serializable {
     public SendableCommand(String[] args, String commandName, Ticket ticket) {
         this(args, commandName);
         this.ticket = ticket;
+    }
+
+    public SendableCommand(String[] args, String commandName, LinkedList<SendableCommand> commandList) {
+        this(args, commandName);
+        this.commandList = commandList;
     }
 
     public String[] getArgs() {
@@ -36,11 +41,8 @@ public class SendableCommand implements Serializable {
         return ticket;
     }
 
-    // public Command GetCommand
-    @Override
-    public String toString() {
-        return "{" + " args='" + getArgs() + "'" + ", commandName='" + getCommandName() + "'" + ", ticket='"
-                + getTicket() + "'" + "}";
+    public LinkedList<SendableCommand> getCommandList() {
+        return commandList;
     }
 
     @Override
@@ -51,12 +53,22 @@ public class SendableCommand implements Serializable {
             return false;
         }
         SendableCommand sendableCommand = (SendableCommand) o;
-        return Objects.equals(args, sendableCommand.args) && Objects.equals(commandName, sendableCommand.commandName)
-                && Objects.equals(ticket, sendableCommand.ticket);
+        return Objects.equals(args, sendableCommand.args) && Objects.equals(commandName, sendableCommand.commandName) && Objects.equals(ticket, sendableCommand.ticket) && Objects.equals(commandList, sendableCommand.commandList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(args, commandName, ticket);
+        return Objects.hash(args, commandName, ticket, commandList);
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " args='" + getArgs() + "'" +
+            ", commandName='" + getCommandName() + "'" +
+            ", ticket='" + getTicket() + "'" +
+            ", commandList='" + getCommandList() + "'" +
+            "}";
+    }
+
 }

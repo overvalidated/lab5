@@ -3,6 +3,7 @@ package org.germanbeyger.lab5.server_commands;
 import java.util.Scanner;
 
 import org.germanbeyger.lab5.XMLCollectionProcessor;
+import org.germanbeyger.lab5.datatypes.SendableCommand;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 
 public final class Save {

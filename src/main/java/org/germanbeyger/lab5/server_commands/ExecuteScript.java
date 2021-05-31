@@ -2,6 +2,8 @@ package org.germanbeyger.lab5.server_commands;
 
 import java.rmi.NoSuchObjectException;
 import java.util.LinkedList;
+
+import org.germanbeyger.lab5.datatypes.SendableCommand;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 
 public final class ExecuteScript {

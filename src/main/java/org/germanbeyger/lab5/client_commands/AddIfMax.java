@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import org.germanbeyger.lab5.TransmissionInterrupted;
 import org.germanbeyger.lab5.cli.CLIObjectCreator;
-import org.germanbeyger.lab5.server_commands.SendableCommand;
+import org.germanbeyger.lab5.datatypes.SendableCommand;
 
 public final class AddIfMax {
     private AddIfMax() {}

@@ -44,10 +44,6 @@ public class TargetCollection implements ITargetCollection {
 
     // Service functions
 
-    public int getNextId() {
-        return nextId;
-    }
-
     public int countElements() {
         return targetCollection.size();
     }
@@ -74,8 +70,8 @@ public class TargetCollection implements ITargetCollection {
     }
 
     public void add(Ticket ticket) {
-        nextId++;
         ticket.setId(nextId);
+        nextId++;
         if (maxTicket == null) {
             maxTicket = ticket;
         } else if (ticket.compareTo(maxTicket) > 0) {

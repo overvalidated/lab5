@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.StreamCorruptedException;
 import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 import java.nio.channels.SelectionKey;
@@ -16,7 +17,7 @@ import java.rmi.NoSuchObjectException;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.germanbeyger.lab5.server_commands.SendableCommand;
+import org.germanbeyger.lab5.datatypes.SendableCommand;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 import org.germanbeyger.lab5.server_commands.Commands;
 
@@ -72,22 +73,24 @@ public class Server {
         final int PORT = Integer.parseInt(args[0]);
         System.out.println(PORT);
 
-        ServerSocketChannel sChannel;
-        Selector connectionSelector = Selector.open();
-
-        sChannel = ServerSocketChannel.open();
-        sChannel.socket().bind(new InetSocketAddress(PORT));
-        sChannel.configureBlocking(false);
-        sChannel.register(connectionSelector, SelectionKey.OP_ACCEPT);
-
         DatagramChannel udpChannel = DatagramChannel.open();
         udpChannel.socket().bind(new InetSocketAddress(PORT));
+        udpChannel.configureBlocking(false);
+
+        // ServerSocketChannel sChannel;
+        Selector connectionSelector = Selector.open();
+        udpChannel.register(connectionSelector, SelectionKey.OP_READ);
+
+        // sChannel = ServerSocketChannel.open();
+        // sChannel.socket().bind(new InetSocketAddress(PORT));
+        // sChannel.configureBlocking(false);
+        // sChannel.register(connectionSelector, SelectionKey.OP_ACCEPT);
 
         while (true) {
             // blocking until at least one channel is ready
-            connectionSelector.select();
+            int readyChannels = connectionSelector.selectNow();
 
-            // if(readyChannels == 0) continue;
+            if(readyChannels == 0) continue;
 
             Set<SelectionKey> selectedKeys = connectionSelector.selectedKeys(); 
             Iterator<SelectionKey> keyIterator = selectedKeys.iterator();
@@ -97,27 +100,34 @@ public class Server {
                 SelectionKey key = keyIterator.next();
                 keyIterator.remove();
 
-                if (key.isAcceptable()) {
-                    System.out.println("Connection in...");
-                    ServerSocketChannel serverChannel = (ServerSocketChannel) key.channel();
-                    SocketChannel socketChannel = serverChannel.accept();
-                    System.out.println("Connection accepted!");
+                // if (key.isAcceptable()) {
+                //     System.out.println("Connection in...");
+                //     ServerSocketChannel serverChannel = (ServerSocketChannel) key.channel();
+                //     SocketChannel socketChannel = serverChannel.accept();
+                //     System.out.println("Connection accepted!");
                     
-                    if (socketChannel != null){
-                        socketChannel.configureBlocking(false);
-                        socketChannel.register(connectionSelector, SelectionKey.OP_READ);
-                    }
-                }
+                //     if (socketChannel != null){
+                //         socketChannel.configureBlocking(false);
+                //         socketChannel.register(connectionSelector, SelectionKey.OP_READ);
+                //     }
+                // }
 
                 if (key.isReadable()) {
                     try {
-                        SocketChannel socketChannel = (SocketChannel) key.channel();
+                        // SocketChannel socketChannel = (SocketChannel) key.channel();
+                        DatagramChannel socketChannel = (DatagramChannel) key.channel();
                         ByteBuffer buffer = ByteBuffer.allocate(8192);
-                        int bytesRead = socketChannel.read(buffer);
-                        if (bytesRead == -1) continue;
-                        while (bytesRead != -1) {
-                            bytesRead = socketChannel.read(buffer);
+                        SocketAddress sch = socketChannel.receive(buffer);
+                        while (sch == null) {
+                            sch = socketChannel.receive(buffer);
                         }
+                        System.out.println(buffer.position());
+
+                        // int bytesRead = socketChannel.read(buffer);
+                        // if (bytesRead == -1) continue;
+                        // while (bytesRead != -1) {
+                        //     bytesRead = socketChannel.read(buffer);
+                        // }
                         
                         System.out.println("Data incoming...");
                         try {
@@ -126,11 +136,10 @@ public class Server {
                             Object deserialized = objStream.readObject();
                             if (deserialized instanceof SendableCommand) {
                                 SendableCommand command = (SendableCommand) deserialized;
-                                System.out.println(command);
                                 String response = execute_command(command);
                                 System.out.println(response);
                                 ByteBuffer responseBuffer = ByteBuffer.wrap(response.getBytes());
-                                udpChannel.send(responseBuffer, socketChannel.getRemoteAddress());
+                                socketChannel.send(responseBuffer, sch);
                                 // command processing
                                 // System.exit(-1);
                             }

@@ -154,7 +154,6 @@ public class Ticket implements Comparable<Ticket>, Serializable {
         aOutputStream.writeLong(getPrice());
         aOutputStream.writeDouble(getDiscount());
         aOutputStream.writeBoolean(getRefundable());
-        aOutputStream.writeLong(getPrice());
         aOutputStream.writeObject(getType());
         aOutputStream.writeObject(getPerson());
     }

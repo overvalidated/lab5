@@ -4,10 +4,10 @@ import java.rmi.NoSuchObjectException;
 import java.util.Scanner;
 
 import org.germanbeyger.lab5.TransmissionInterrupted;
+import org.germanbeyger.lab5.datatypes.SendableCommand;
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 import org.germanbeyger.lab5.interfaces.ICommandCreator;
 import org.germanbeyger.lab5.interfaces.IExecutor;
-import org.germanbeyger.lab5.server_commands.SendableCommand;
 
 /**
  * Class for storing and invoking every available interactive command

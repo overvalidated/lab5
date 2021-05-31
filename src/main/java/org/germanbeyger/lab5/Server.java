@@ -64,6 +64,7 @@ public class Server {
                             if (deserialized instanceof SendableCommand) {
                                 SendableCommand command = (SendableCommand) deserialized;
                                 System.out.println(command);
+                                System.out.printf("Ticket verification: %b\n", command.getTicket().verify());
                             }
                         } catch (ClassNotFoundException ex) {
                             ex.printStackTrace(); // remove it later

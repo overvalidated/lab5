@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 import org.germanbeyger.lab5.interfaces.IExecutor;
-
 /**
  * Class for storing and invoking every available interactive command
  * <p>

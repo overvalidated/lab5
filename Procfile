@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* com.example.HelloWorld
+web: java $JAVA_OPTS -cp target/lab5-1.0-SNAPSHOT.jar org.germanbeyger.lab5.Server

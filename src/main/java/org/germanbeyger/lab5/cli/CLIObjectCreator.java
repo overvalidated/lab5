@@ -21,10 +21,9 @@ public final class CLIObjectCreator {
     public static Ticket requestNewTicket(int id, Scanner stdInScanner) {
         // Used to parse name field in Ticket class
         Function<String, String> nameParser = (input) -> { 
-            if (input == "") 
+            if (input.isEmpty()) 
                 throw new IllegalArgumentException("Name can't be an empty string");
-            else
-                return input;
+            return input;
         };
         String name = FieldRequester.parseField(nameParser, "Enter a name: ", false, stdInScanner);
         Coordinates coords = requestNewCoordinate(stdInScanner);

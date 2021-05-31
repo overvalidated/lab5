@@ -13,4 +13,11 @@ public final class Add {
             CLIObjectCreator.requestNewTicket(targetCollection.getNextId(), stdInScanner)
         );
     }
+    /**
+     * This overload allows for sending command to server.
+     * It takes a connection to write to. And sends a serialized version of itself. 
+     */
+    public static void execute() {
+        
+    }
 }

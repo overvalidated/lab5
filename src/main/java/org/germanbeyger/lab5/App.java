@@ -12,7 +12,7 @@ import org.germanbeyger.lab5.commands.Commands;
 public class App {
     private static TargetCollection targetCollection;
     static String collectionPath = "collection.xml";
-
+    
     public static void promptNewCollection(Scanner stdInScanner) {
         //
         Function<String, Boolean> parseAnswer = (input) -> {

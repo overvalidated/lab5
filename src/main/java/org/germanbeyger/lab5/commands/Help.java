@@ -1,10 +1,11 @@
 package org.germanbeyger.lab5.commands;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 
-public final class Help {
+public final class Help implements Serializable {
     private Help() {}
 
     public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {

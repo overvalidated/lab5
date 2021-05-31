@@ -1,7 +1,6 @@
 package org.germanbeyger.lab5.commands;
 
 import java.io.Serializable;
-import java.io.ObjectOutputStream;
 
 import org.germanbeyger.lab5.interfaces.IExecutor;
 
@@ -11,15 +10,12 @@ import org.germanbeyger.lab5.interfaces.IExecutor;
  */
 public abstract class Command implements IExecutor, Serializable {
     private String[] args;
-    // It's unsafe to pass the whole command as it can override the action.
-    private int commandNumber;
+    private Command commandNumber;
 
     public Command(String[] args, final String commandName) {
         this.args = args;
         for (Commands commands : Commands.values()) {
-            if (commands.getName().equals(commandName)) {
-                commandNumber = commands.ordinal();
-            }
+            // todo add command creation
         }
     }
 
@@ -27,7 +23,6 @@ public abstract class Command implements IExecutor, Serializable {
         return args;
     }
 
-    public int getCommandNumber() {
-        return commandNumber;
-    }
+    // public Command GetCommand
+
 }

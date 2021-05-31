@@ -3,10 +3,10 @@ package org.germanbeyger.lab5.datatypes;
 
 public class Location {
     private Double x; //Поле не может быть null
-    private long y;
+    private Long y;
     private Double z; //Поле не может быть null
 
-    public Location(Double x, long y, Double z) {
+    public Location(Double x, Long y, Double z) {
         if (x == null || z == null) throw new IllegalArgumentException("Fields x and z can't be null.");
         this.x = x;
         this.y = y;

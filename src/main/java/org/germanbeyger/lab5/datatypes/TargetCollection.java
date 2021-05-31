@@ -26,6 +26,9 @@ public class TargetCollection implements ITargetCollection {
                 .map(input -> input.getId())
                 .collect(Collectors.toList()));
         ids.sort(Integer::compareTo);
+        if (nextId < 1) {
+            return false;
+        }
         try {
             int prev = ids.get(0);
             for (int i = 1; i < ids.size()-2; i++) {

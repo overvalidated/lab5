@@ -14,8 +14,8 @@ import org.germanbeyger.lab5.interfaces.IExecutor;
  * This method finds command and invokes lambda-expression.
  * Commands don't return anything.
  * <p>
- * 
- * 
+ * z
+ * k
  */
 public enum Commands {
     ADD        ("add", Add::execute),
@@ -64,6 +64,10 @@ public enum Commands {
         throw new NoSuchObjectException(
             String.format("Command \"%s\" was not found.", COMMAND_NAME)
         );
+    }
+
+    public static void invokeCommand(Command command) {
+        
     }
 
     /**

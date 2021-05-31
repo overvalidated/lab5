@@ -2,7 +2,9 @@ package org.germanbeyger.lab5;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
 import java.nio.channels.Channel;
+import java.nio.channels.DatagramChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
@@ -25,24 +27,36 @@ public class Server {
         sChannel.register(connectionSelector, SelectionKey.OP_ACCEPT);
 
         while (true) {
-            // blocking until atleast one channel is ready
+            // blocking until at least one channel is ready
             connectionSelector.select();
             Set<SelectionKey> selectedKeys = connectionSelector.selectedKeys();  
 
+            // new tcp connection
             for (SelectionKey key : selectedKeys) {
                 if (key.isAcceptable()) {
                     ServerSocketChannel serverChannel = (ServerSocketChannel) key.channel();
-                    SocketChannel connectionSocket = serverChannel.accept();
-
-                    if (connectionSocket != null){
-                        connectionSocket.configureBlocking(false);
-                        connectionSocket.register(connectionSelector, SelectionKey.OP_READ);
+                    SocketChannel socketChannel = serverChannel.accept();
+                    
+                    if (socketChannel != null){
+                        socketChannel.configureBlocking(false);
+                        socketChannel.register(connectionSelector, SelectionKey.OP_READ);
                     }
                 }
 
                 if (key.isReadable()) {
-                    SocketChannel socketChannel = (SocketChannel) key.channel();
-                    // socketChannel.read();
+                    try {
+                        SocketChannel socketChannel = (SocketChannel) key.channel();
+                        ByteBuffer buffer = ByteBuffer.allocate(1024);
+                        int bytesRead = socketChannel.read(buffer);
+
+                        while (bytesRead != -1) {
+                            buffer 
+                            int bytesRead = socketChannel.read(buffer);
+                        }
+                    }
+                    catch (ClassCastException ex) {
+                        ex.printStackTrace(); // remove it later
+                    }
                 }
             }
         }

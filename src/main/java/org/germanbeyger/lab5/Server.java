@@ -59,7 +59,7 @@ public class Server {
                 if (key.isReadable()) {
                     try {
                         SocketChannel socketChannel = (SocketChannel) key.channel();
-                        ByteBuffer buffer = ByteBuffer.allocate(1024);
+                        ByteBuffer buffer = ByteBuffer.allocate(8192);
                         int bytesRead = socketChannel.read(buffer);
                         while (bytesRead != -1) {
                             bytesRead = socketChannel.read(buffer);

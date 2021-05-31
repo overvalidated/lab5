@@ -124,7 +124,7 @@ public class Ticket implements Comparable<Ticket> {
             ", person='" + getPerson() + "'" +
             "}";
     }
-
+    // returns true if Ticket is correct
     public boolean verify() {
         if (name == null || coordinates == null || type == null || person == null || creationDate == null) return false;
         if (price <= 0) return false;

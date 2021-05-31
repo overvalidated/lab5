@@ -66,10 +66,6 @@ public enum Commands {
         );
     }
 
-    public static void invokeCommand(SendableCommand command) {
-        
-    }
-
     /**
      * 
      * @param args

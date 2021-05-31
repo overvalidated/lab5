@@ -2,6 +2,7 @@ package org.germanbeyger.lab5.commands;
 
 import java.io.Serializable;
 
+import org.germanbeyger.lab5.datatypes.Ticket;
 import org.germanbeyger.lab5.interfaces.IExecutor;
 
 
@@ -11,17 +12,25 @@ import org.germanbeyger.lab5.interfaces.IExecutor;
 public abstract class SendableCommand implements IExecutor, Serializable {
     private final static long serialVersionUID = 1L;
     private String[] args;
-    private Command commandNumber;
+    private String commandName;
+    private Ticket ticket = null;
 
-    public SendableCommand(String[] args, final String commandName) {
+    public SendableCommand(String[] args, String commandName) {
         this.args = args;
-        for (Commands commands : Commands.values()) {
-            // todo add command creation
-        }
+        this.commandName = commandName;
+    }
+
+    public SendableCommand(String[] args, String commandName, Ticket ticket) {
+        this(args, commandName);
+        this.ticket = ticket;
     }
 
     public String[] getArgs() {
         return args;
+    }
+
+    public String getCommand() {
+        return commandName;
     }
 
     // public Command GetCommand

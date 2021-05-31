@@ -73,23 +73,23 @@ public class Server {
                                 SendableCommand command = (SendableCommand) deserialized;
                                 System.out.println(command);
                                 System.out.printf("Ticket verification: %b\n", command.getTicket().verify());
-                                System.exit(-1);
+                                // System.exit(-1);
                             }
                         } catch (ClassNotFoundException ex) {
                             ex.printStackTrace(); // remove it later
-                            System.exit(-1);
+                            // System.exit(-1);
                         } catch (StreamCorruptedException ex) {
                             ex.printStackTrace();
-                            System.exit(-1);
+                            // System.exit(-1);
                         } catch (Exception ex) {
                             ex.printStackTrace();
-                            System.exit(-1);
+                            // System.exit(-1);
                         }
 
                     }
                     catch (ClassCastException ex) {
                         ex.printStackTrace(); // remove it later
-                        System.exit(-1);
+                        // System.exit(-1);
                     }
                 }
             }

@@ -14,7 +14,7 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.germanbeyger.lab5.commands.SendableCommand;
+import org.germanbeyger.lab5.server_commands.SendableCommand;
 
 /**
  * Class responsible for running server
@@ -29,19 +29,18 @@ public class Server {
 
         sChannel = ServerSocketChannel.open();
         sChannel.socket().bind(new InetSocketAddress(PORT));
-        System.out.println(sChannel.getLocalAddress());
         sChannel.configureBlocking(false);
         sChannel.register(connectionSelector, SelectionKey.OP_ACCEPT);
 
         while (true) {
             // blocking until at least one channel is ready
-            int readyChannels = connectionSelector.selectNow();
+            connectionSelector.select();
 
-            if(readyChannels == 0) continue;
+            // if(readyChannels == 0) continue;
 
             Set<SelectionKey> selectedKeys = connectionSelector.selectedKeys(); 
             Iterator<SelectionKey> keyIterator = selectedKeys.iterator();
-             
+
             // new tcp connection
             while(keyIterator.hasNext()) {
                 SelectionKey key = keyIterator.next();
@@ -64,10 +63,11 @@ public class Server {
                         SocketChannel socketChannel = (SocketChannel) key.channel();
                         ByteBuffer buffer = ByteBuffer.allocate(8192);
                         int bytesRead = socketChannel.read(buffer);
+                        if (bytesRead == -1) continue;
                         while (bytesRead != -1) {
                             bytesRead = socketChannel.read(buffer);
                         }
-                        if (buffer.position() == 0) continue;
+                        
                         System.out.println("Data incoming...");
                         try {
                             ByteArrayInputStream bytesStream = new ByteArrayInputStream(buffer.array());

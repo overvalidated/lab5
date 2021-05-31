@@ -1,13 +1,13 @@
-package org.germanbeyger.lab5.commands;
+package org.germanbeyger.lab5.server_commands;
 
 import java.util.Scanner;
 
 import org.germanbeyger.lab5.datatypes.TargetCollection;
 
-public final class Clear  {
-    private Clear() {}
+public final class History {
+    private History() {}
 
     public static void execute(String[] commandArgs, TargetCollection targetCollection, Scanner stdInScanner) {
-        targetCollection.clear();
+        System.out.print(targetCollection.getStringifiedHistory());
     }
 }

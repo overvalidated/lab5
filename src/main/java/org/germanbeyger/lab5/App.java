@@ -6,8 +6,8 @@ import java.util.Scanner;
 import java.util.function.Function;
 
 import org.germanbeyger.lab5.datatypes.TargetCollection;
+import org.germanbeyger.lab5.server_commands.Commands;
 import org.germanbeyger.lab5.cli.FieldRequester;
-import org.germanbeyger.lab5.commands.Commands;
 
 public class App {
     private static TargetCollection targetCollection;

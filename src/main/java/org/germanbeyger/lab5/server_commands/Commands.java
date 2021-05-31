@@ -1,4 +1,4 @@
-package org.germanbeyger.lab5.commands;
+package org.germanbeyger.lab5.server_commands;
 
 import java.rmi.NoSuchObjectException;
 import java.util.Scanner;

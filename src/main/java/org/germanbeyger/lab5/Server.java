@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.channels.Channel;
-import java.nio.channels.DatagramChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
@@ -20,7 +18,7 @@ import org.germanbeyger.lab5.commands.SendableCommand;
  */
 public class Server {
     public static void main(String[] args) throws IOException {
-        final int PORT = 34223;
+        final int PORT = 80;
 
         ServerSocketChannel sChannel;
         Selector connectionSelector = Selector.open();

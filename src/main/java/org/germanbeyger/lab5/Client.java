@@ -6,8 +6,9 @@ import java.net.UnknownHostException;
 
 public class Client {
     public static void main(String[] args) {
-        try ( Socket socket = new Socket(args[0], 34223)) {
-
+        try ( Socket socket = new Socket(args[0], 80)) {
+            System.out.println("Connected!");
+            System.out.println();
         } catch (UnknownHostException ex) {
             ex.printStackTrace();
         } 

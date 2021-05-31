@@ -48,8 +48,10 @@ public class Server {
                 keyIterator.remove();
 
                 if (key.isAcceptable()) {
+                    System.out.println("Connection in...");
                     ServerSocketChannel serverChannel = (ServerSocketChannel) key.channel();
                     SocketChannel socketChannel = serverChannel.accept();
+                    System.out.println("Connection accepted!");
                     
                     if (socketChannel != null){
                         socketChannel.configureBlocking(false);

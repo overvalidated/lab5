@@ -75,11 +75,11 @@ public class Server {
                                 System.out.printf("Ticket verification: %b\n", command.getTicket().verify());
                             }
                         } catch (ClassNotFoundException ex) {
-                            ex.printStackTrace(); // remove it later
+                            // ex.printStackTrace(); // remove it later
                         } catch (StreamCorruptedException ex) {
-                            ex.printStackTrace();
+                            // ex.printStackTrace();
                         } catch (Exception ex) {
-                            ex.printStackTrace();
+                            // ex.printStackTrace();
                         }
 
                     }

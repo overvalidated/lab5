@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.StreamCorruptedException;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
@@ -28,7 +29,7 @@ public class Server {
         // Selector connectionSelector = Selector.open();
 
         sChannel = ServerSocketChannel.open();
-        sChannel.socket().bind(new InetSocketAddress(PORT));
+        sChannel.socket().bind(new InetSocketAddress(InetAddress.getByAddress(new byte[]{0,0,0,0}), PORT));
         sChannel.configureBlocking(false);
         // sChannel.register(connectionSelector, SelectionKey.OP_ACCEPT);
 

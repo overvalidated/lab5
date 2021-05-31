@@ -10,7 +10,9 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.Iterator;
 import java.util.Set;
+
 
 import org.germanbeyger.lab5.commands.SendableCommand;
 
@@ -32,12 +34,18 @@ public class Server {
 
         while (true) {
             // blocking until at least one channel is ready
-            connectionSelector.select();
-            Set<SelectionKey> selectedKeys = connectionSelector.selectedKeys();  
+            int readyChannels = connectionSelector.selectNow();
 
+            if(readyChannels == 0) continue;
+
+            Set<SelectionKey> selectedKeys = connectionSelector.selectedKeys(); 
+            Iterator<SelectionKey> keyIterator = selectedKeys.iterator();
+             
             // new tcp connection
-            for (SelectionKey key : selectedKeys) {
-                
+            while(keyIterator.hasNext()) {
+                SelectionKey key = keyIterator.next();
+                keyIterator.remove();
+
                 if (key.isAcceptable()) {
                     ServerSocketChannel serverChannel = (ServerSocketChannel) key.channel();
                     SocketChannel socketChannel = serverChannel.accept();
@@ -56,7 +64,7 @@ public class Server {
                         while (bytesRead != -1) {
                             bytesRead = socketChannel.read(buffer);
                         }
-                        System.out.println("WTF???|");
+                        if (buffer.position() == 0) continue;
                         try {
                             ByteArrayInputStream bytesStream = new ByteArrayInputStream(buffer.array());
                             ObjectInputStream objStream = new ObjectInputStream(bytesStream);

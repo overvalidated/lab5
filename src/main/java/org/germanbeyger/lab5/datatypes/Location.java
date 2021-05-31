@@ -1,7 +1,9 @@
 package org.germanbeyger.lab5.datatypes;
 
+import java.io.Serializable;
 
-public class Location {
+public class Location implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Double x; //Поле не может быть null
     private Long y;
     private Double z; //Поле не может быть null

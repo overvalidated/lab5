@@ -1,7 +1,9 @@
 package org.germanbeyger.lab5.datatypes;
 
+import java.io.Serializable;
 
-public class Coordinates{
+public class Coordinates implements Serializable{
+    private static final long serialVersionUID = 1L;
     private long x; //Максимальное значение поля: 643
     private double y;
 

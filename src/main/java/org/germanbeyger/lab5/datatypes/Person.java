@@ -1,6 +1,9 @@
 package org.germanbeyger.lab5.datatypes;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable{
+    private static final long serialVersionUID = 1L;
     private float height; //Значение поля должно быть больше 0
     private Color eyeColor; //Поле не может быть null
     private Color2 hairColor; //Поле не может быть null

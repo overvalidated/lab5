@@ -1,6 +1,5 @@
 package org.germanbeyger.lab5.commands;
 
-import java.io.Serializable;
 import java.util.Scanner;
 
 import org.germanbeyger.lab5.datatypes.TargetCollection;

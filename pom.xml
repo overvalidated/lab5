@@ -29,12 +29,6 @@
     </dependency>
   </dependencies>
 
-  <repository>
-    <id>ProjectRepo</id>
-    <name>ProjectRepo</name>
-    <url>file://${project.basedir}/libs</url>
-  </repository>
-
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>

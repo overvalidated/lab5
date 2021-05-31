@@ -70,6 +70,8 @@ public class Server {
                             ex.printStackTrace(); // remove it later
                         } catch (StreamCorruptedException ex) {
                             ex.printStackTrace();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
                         }
 
                     }

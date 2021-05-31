@@ -84,7 +84,8 @@ public class Server {
 
                     }
                     catch (ClassCastException ex) {
-                        //ex.printStackTrace(); // remove it later
+                        ex.printStackTrace(); // remove it later
+                        System.exit(-1);
                     }
                 }
             }

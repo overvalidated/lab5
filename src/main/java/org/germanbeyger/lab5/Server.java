@@ -79,7 +79,8 @@ public class Server {
                         } catch (StreamCorruptedException ex) {
                             // ex.printStackTrace();
                         } catch (Exception ex) {
-                            // ex.printStackTrace();
+                            ex.printStackTrace();
+                            System.exit(-1);
                         }
 
                     }

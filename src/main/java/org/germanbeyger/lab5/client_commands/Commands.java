@@ -57,7 +57,7 @@ public enum Commands {
         SendableCommand sendableCommand = null;
         
         switch (COMMAND_NAME) {
-            case "execute_script": ExecuteScript.executeScript(args[1]); return null; 
+            case "execute_script": return ExecuteScript.executeScript(args[1]);
             case "exit": Exit.execute(); return null;
             case "help": Help.execute(); return null;
             default:

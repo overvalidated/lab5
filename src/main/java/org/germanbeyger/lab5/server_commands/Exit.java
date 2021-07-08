@@ -7,6 +7,7 @@ public final class Exit {
     private Exit() {}
 
     public static String execute(SendableCommand command, TargetCollection targetCollection) {
+        Save.execute(command, targetCollection);
         System.exit(0);
         return "";
     }

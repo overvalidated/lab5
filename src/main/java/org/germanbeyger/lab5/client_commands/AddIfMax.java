@@ -10,6 +10,6 @@ public final class AddIfMax {
     private AddIfMax() {}
 
     public static SendableCommand execute(String[] args, Scanner stdInScanner) throws TransmissionInterrupted {
-        return new SendableCommand(new String[] {}, "add_if_max", CLIObjectCreator.requestNewTicket(stdInScanner));
+        return new SendableCommand(args, "add_if_max", CLIObjectCreator.requestNewTicket(stdInScanner));
     }
 }

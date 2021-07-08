@@ -19,10 +19,10 @@ import java.util.Date;
  */
 public class Ticket implements Comparable<Ticket>, Serializable {
     private static final long serialVersionUID = 1L;
-    private transient int id = 1; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    private int id = 1; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
-    private transient Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private long price; //Значение поля должно быть больше 0
     private double discount; //Значение поля должно быть больше 0, Максимальное значение поля: 100
     private boolean refundable;
@@ -135,28 +135,28 @@ public class Ticket implements Comparable<Ticket>, Serializable {
         return (getCoordinates().verify() && getPerson().verify());
     }
 
-    private void readObject(ObjectInputStream aInputStream) throws ClassNotFoundException, IOException 
-    {       
-        this.name = aInputStream.readUTF();
-        this.coordinates = (Coordinates) aInputStream.readObject();
-        this.creationDate = Date.from(Instant.now());
-        this.price = aInputStream.readLong();
-        this.discount = aInputStream.readDouble();
-        this.refundable = aInputStream.readBoolean();
-        this.type = (TicketType) aInputStream.readObject();
-        this.person = (Person) aInputStream.readObject(); 
-    }
+    // private void readObject(ObjectInputStream aInputStream) throws ClassNotFoundException, IOException 
+    // {       
+    //     this.name = aInputStream.readUTF();
+    //     this.coordinates = (Coordinates) aInputStream.readObject();
+    //     this.creationDate = Date.from(Instant.now());
+    //     this.price = aInputStream.readLong();
+    //     this.discount = aInputStream.readDouble();
+    //     this.refundable = aInputStream.readBoolean();
+    //     this.type = (TicketType) aInputStream.readObject();
+    //     this.person = (Person) aInputStream.readObject(); 
+    // }
 
-    private void writeObject(ObjectOutputStream aOutputStream) throws IOException 
-    {
-        aOutputStream.writeUTF(getName());
-        aOutputStream.writeObject(getCoordinates());
-        aOutputStream.writeLong(getPrice());
-        aOutputStream.writeDouble(getDiscount());
-        aOutputStream.writeBoolean(getRefundable());
-        aOutputStream.writeObject(getType());
-        aOutputStream.writeObject(getPerson());
-    }
+    // private void writeObject(ObjectOutputStream aOutputStream) throws IOException 
+    // {
+    //     aOutputStream.writeUTF(getName());
+    //     aOutputStream.writeObject(getCoordinates());
+    //     aOutputStream.writeLong(getPrice());
+    //     aOutputStream.writeDouble(getDiscount());
+    //     aOutputStream.writeBoolean(getRefundable());
+    //     aOutputStream.writeObject(getType());
+    //     aOutputStream.writeObject(getPerson());
+    // }
 
     public int getId() {
         return this.id;
@@ -164,6 +164,10 @@ public class Ticket implements Comparable<Ticket>, Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setCurrentDate() {
+        this.creationDate = Date.from(Instant.now());
     }
 
     public String getName() {

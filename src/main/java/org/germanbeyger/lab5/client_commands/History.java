@@ -9,6 +9,6 @@ public final class History {
     private History() {}
 
     public static SendableCommand execute(Object... args) {
-        return new SendableCommand(new String[] {}, "history");
+        return new SendableCommand(new String[] {"history"}, "history");
     }
 }

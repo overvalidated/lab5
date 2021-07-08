@@ -12,7 +12,7 @@ public final class FilterContainsName {
     public static String execute(SendableCommand command, TargetCollection targetCollection) {
         String result = "";
         LinkedList<Ticket> filteredCollection = 
-            targetCollection.filter(input -> input.getName().equals(command.getArgs()[0]));
+            targetCollection.filter(input -> input.getName().equals(command.getArgs()[1]));
         for (Ticket ticket : filteredCollection)
             result += ticket.toString() + "\n";
         return result;

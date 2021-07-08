@@ -11,7 +11,7 @@ public final class RemoveById {
     public static String execute(SendableCommand command, TargetCollection targetCollection) {
         String result = "";
         try {
-            targetCollection.remove(Integer.parseInt(command.getArgs()[0]));
+            targetCollection.remove(Integer.parseInt(command.getArgs()[1]));
         } catch (IllegalArgumentException e) {
             result = "The argument to this command must be an integer. ";
         } catch (NoSuchElementException e) {

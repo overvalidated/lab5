@@ -2,7 +2,7 @@ package org.germanbeyger.lab5.datatypes;
 
 import java.io.Serializable;
 
-public class Coordinates implements Serializable{
+public class Coordinates implements Serializable, Comparable<Coordinates> {
     private static final long serialVersionUID = 1L;
     private long x; //Максимальное значение поля: 643
     private double y;
@@ -18,6 +18,14 @@ public class Coordinates implements Serializable{
         return x <= 643;
     }
 
+    public int compareTo(Coordinates b) {
+        if (this.x - b.x == 0 ) {
+            if (this.y - b.y == 0) return 0;
+             else if (this.y - b.y > 0) return 1;
+             else return -1;
+        } 
+        else return this.x - b.x > 0 ? 1 : -1;
+    }
 
     @Override
     public String toString() {

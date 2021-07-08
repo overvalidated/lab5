@@ -4,13 +4,16 @@ import java.util.Scanner;
 
 import org.germanbeyger.lab5.cli.FieldRequester;
 import org.germanbeyger.lab5.datatypes.SendableCommand;
-import org.germanbeyger.lab5.datatypes.TargetCollection;
 
 public final class RemoveById {
     private RemoveById() {}
 
     public static SendableCommand execute(String[] commandArgs, Scanner stdInScanner) {
-        String id = FieldRequester.retrieveArgument(commandArgs, (input) -> input);
-        return new SendableCommand(new String[] {}, "remove_by_id");
+        Integer id = FieldRequester.retrieveArgument(commandArgs, Integer::parseInt);
+        if (id < 1) {
+            System.out.println("Id must be positive.");
+            return null;
+        }
+        return new SendableCommand(commandArgs, "remove_by_id");
     }
 }

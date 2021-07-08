@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.germanbeyger.lab5.interfaces.ITargetCollection;
 
@@ -71,6 +72,7 @@ public class TargetCollection implements ITargetCollection {
 
     public void add(Ticket ticket) {
         ticket.setId(nextId);
+        ticket.setCurrentDate();
         nextId++;
         if (maxTicket == null) {
             maxTicket = ticket;
@@ -96,6 +98,12 @@ public class TargetCollection implements ITargetCollection {
 
     public void clear() {
         targetCollection.clear();
+        nextId = 1;
+        maxTicket = null;
+    }
+
+    public Stream<Ticket> stream() {
+        return targetCollection.stream();
     }
 
     public void removeIf(Predicate<Ticket> filterFunction) {
@@ -120,9 +128,11 @@ public class TargetCollection implements ITargetCollection {
     }
 
     public void update(int idx, Ticket ticket) throws NoSuchElementException {
+        if (idx < 1) return;
         int idxReal = identifyTicket(idx);
+        ticket.setId(idx);
+        ticket.setCurrentDate();
         targetCollection.set(idxReal, ticket);
-        
     }
 
     // Metadata processing

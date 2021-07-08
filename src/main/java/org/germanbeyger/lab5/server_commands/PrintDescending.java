@@ -8,9 +8,6 @@ public final class PrintDescending {
     private PrintDescending() {}
 
     public static String execute(SendableCommand command, TargetCollection targetCollection) {
-        String result = "";
-        for (Ticket ticket : targetCollection.getSortedCollection()) 
-            result += ticket.toString() + "\n";
-        return result;
+        return Show.execute(command, targetCollection);
     }
 }

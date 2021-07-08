@@ -10,7 +10,7 @@ public final class RemoveGreater{
     private RemoveGreater() {}
 
     public static SendableCommand execute(String[] commandArgs, Scanner stdInScanner) throws TransmissionInterrupted {
-        return new SendableCommand(new String[] {}, "remove_greater", 
+        return new SendableCommand(commandArgs, "remove_greater", 
             CLIObjectCreator.requestNewTicket(stdInScanner));
     }
 }

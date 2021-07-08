@@ -9,6 +9,6 @@ public final class Info {
     private Info() {}
 
     public static SendableCommand execute(Object... args) {
-        return new SendableCommand(new String[] {}, "info");
+        return new SendableCommand(new String[] {"info"}, "info");
     }
 }

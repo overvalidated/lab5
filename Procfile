@@ -1,1 +1,0 @@
-web: java $JAVA_OPTS -cp target/lab5-1.0-SNAPSHOT.jar org.germanbeyger.lab5.Server $PORT asdf.xml

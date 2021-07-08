@@ -63,9 +63,6 @@ public class FieldRequester {
      * @throws IllegalArgumentException
      */
     public static <T> T retrieveArgument(String[] args, Function<String, T> parseFunction) throws IllegalArgumentException  {
-        if (args.length != 2) { 
-            throw new IllegalArgumentException(String.format("Expected 2 arguments, got %d\n", args.length));
-        }
         try {
             return parseFunction.apply(args[1]);
         } catch (Exception e) { // Actually, we don't know what to catch here. And we don't care. 

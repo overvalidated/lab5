@@ -10,7 +10,7 @@ public final class Add  {
     private Add() {}
 
     public static SendableCommand execute(String[] commandArgs,  Scanner stdInScanner) throws TransmissionInterrupted {
-        return new SendableCommand(new String[] {}, "add", CLIObjectCreator.requestNewTicket(stdInScanner));
+        return new SendableCommand(commandArgs, "add", CLIObjectCreator.requestNewTicket(stdInScanner));
     }
     /**
      * This overload allows for sending command to server.

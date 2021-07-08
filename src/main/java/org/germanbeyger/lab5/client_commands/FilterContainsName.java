@@ -12,9 +12,8 @@ public final class FilterContainsName {
     private FilterContainsName() {}
 
     public static SendableCommand execute(String[] commandArgs, Scanner stdInScanner) {
-
-        String name = FieldRequester.retrieveArgument(commandArgs, (input) -> input);
-        return new SendableCommand(new String[] {name}, "filter_contains_name");
+        FieldRequester.retrieveArgument(commandArgs, (input) -> input);
+        return new SendableCommand(commandArgs, "filter_contains_name");
     }
     
 }

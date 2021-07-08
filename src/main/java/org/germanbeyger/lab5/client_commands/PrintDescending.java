@@ -10,6 +10,6 @@ public final class PrintDescending {
     private PrintDescending() {}
 
     public static SendableCommand execute(String[] commandArgs,  Scanner stdInScanner) {
-        return new SendableCommand(new String[] {}, "print_descending");
+        return new SendableCommand(commandArgs, "print_descending");
     }
 }

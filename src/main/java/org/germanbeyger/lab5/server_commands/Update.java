@@ -12,7 +12,7 @@ public final class Update {
     public static String execute(SendableCommand command, TargetCollection targetCollection) {
         String result = "";
         try {
-            targetCollection.update(Integer.parseInt(command.getArgs()[0]), 
+            targetCollection.update(Integer.parseInt(command.getArgs()[1]), 
                     command.getTicket());
         } catch (IllegalArgumentException e) {
             result = "The argument to this command must be an integer. ";

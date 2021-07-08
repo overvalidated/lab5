@@ -21,6 +21,7 @@ public enum Commands {
     ADD        ("add", Add::execute),
     ADD_IF_MAX ("add_if_max", AddIfMax::execute),
     CLEAR      ("clear", Clear::execute),
+    EXECUTE_SCRIPT       ("execute_script", ExecuteScript::execute),
     FILTER_CONTAINS_NAME ("filter_contains_name", FilterContainsName::execute),
     HISTORY ("history", History::execute),
     INFO ("info", Info::execute),
@@ -28,7 +29,6 @@ public enum Commands {
     PRINT_UNIQUE_TYPE ("print_unique_type", PrintUniqueType::execute),
     REMOVE_BY_ID   ("remove_by_id",   RemoveById::execute),
     REMOVE_GREATER ("remove_greater", RemoveGreater::execute),
-    SAVE   ("save", Save::execute),
     SHOW   ("show", Show::execute),
     UPDATE ("update", Update::execute);
 

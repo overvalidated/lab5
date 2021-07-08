@@ -37,7 +37,7 @@ public class MetaInformationTargetCollection implements IMetainfo {
     }
 
     public String getInfoAboutCollection(TargetCollection targetCollection) {
-        return String.format("Creation date: %s\nNumber of elements: %d\nOperated type: Ticket", 
+        return String.format("Creation date: %s\nNumber of elements: %d\nOperated type: Ticket\n", 
                 creationDate, targetCollection.countElements());
     }
 

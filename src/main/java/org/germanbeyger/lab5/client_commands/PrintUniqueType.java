@@ -12,6 +12,6 @@ public final class PrintUniqueType {
     private PrintUniqueType() {}
 
     public static SendableCommand execute(String[] commandArgs,  Scanner stdInScanner) {
-        return new SendableCommand(new String[] {}, "print_unique_type");
+        return new SendableCommand(commandArgs, "print_unique_type");
     }
 }

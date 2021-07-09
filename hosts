@@ -1,0 +1,1 @@
+helios ansible_port=2222 ansible_private_key='~/.ssh/helios_ssh' ansible_user=s311729 port=50130 collection_path=asdf.xml

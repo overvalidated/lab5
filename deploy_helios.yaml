@@ -1,0 +1,25 @@
+  - name: Deploy lab work to helios and forward ports
+    hosts: helios
+    tasks:
+      - name: Build project
+        local_action: ansible.builtin.command mvn clean package shade:shade
+        
+      - name: Copy built package to helios
+        copy: 
+          src: target/lab5-1.0-SNAPSHOT.jar
+          dest: $HOME/lab5.jar
+          mode: 0500  
+
+      - block:
+        - name: Clean previous java 
+          command: kill -9 $(jps -q)
+
+        - name: Run java
+          shell: 
+            cmd: nohup java18 -cp lab5.jar org.germanbeyger.lab5.Server 55341 asdf.xml > output134 2>/dev/null < /dev/null &
+            executable: /bin/bash
+
+        - name: Forward ports
+          shell: ansible.builtin.command nohup ssh helios -L "{{ port }}:localhost:{{ port }} > output 2>/dev/null < /dev/null & "
+          delegate_to: localhost
+        ignore_errors: yes
